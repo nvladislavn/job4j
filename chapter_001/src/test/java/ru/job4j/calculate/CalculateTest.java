@@ -17,14 +17,14 @@ public class CalculateTest {
 	*/
 	@Test
 	public void whenTakeNameThenThreeEchoPlusName() {
-	
+
 		String input = "Legolas";
 		String expect = "Echo, echo, echo: Legolas";
-		
+
 		Calculate  calc = new Calculate();
-		
+
 		String result = calc.echo(input);
-		
+
 		assertThat(result, is(expect));
 	}
 }
