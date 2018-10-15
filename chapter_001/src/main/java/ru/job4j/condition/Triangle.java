@@ -61,6 +61,6 @@ public class Triangle {
      * модификатор доступа private по условию задания, и здесь получить мы их не можем.
      */
     private boolean exist(double ab, double ac, double bc) {
-        return ab > 0 && ac > 0 && bc > 0;
+        return ab > 0 && ac > 0 && bc > 0 && (ab + ac > bc) && (ab + bc > ac) && (ac + bc > ab);
     }
 }
