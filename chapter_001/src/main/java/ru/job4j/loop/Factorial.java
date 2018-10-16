@@ -1,7 +1,7 @@
 package ru.job4j.loop;
 
 /**
- * Test
+ * Factorial
  *
  * @author Vladislav Nechaev
  * @version $Id$
