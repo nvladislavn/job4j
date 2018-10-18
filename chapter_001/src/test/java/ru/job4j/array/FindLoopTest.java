@@ -34,6 +34,7 @@ public class FindLoopTest {
         assertThat(result, is(-1));
     }
 
+
     /**
      * Test indexOf method
      */
