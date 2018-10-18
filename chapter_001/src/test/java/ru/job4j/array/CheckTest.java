@@ -18,9 +18,9 @@ public class CheckTest {
      * Test check method
      */
     @Test
-    public void whenTrueFalseTrueThenFalse() {
+    public void whenTrueFalseTrueTrueThenFalse() {
         Check check = new Check();
-        boolean result = check.mono(new boolean[]{true, false, true});
+        boolean result = check.mono(new boolean[]{true, false, true, true});
         assertThat(result, is(false));
     }
 
