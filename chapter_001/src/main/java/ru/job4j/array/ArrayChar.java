@@ -24,7 +24,6 @@ public class ArrayChar {
     public boolean startWith(String prefix) {
         boolean result = true;
         char[] prefixArray = prefix.toCharArray();
-        int count = 0;
         for (int i = 0; result && i < prefixArray.length; i++) {
             if (data.length == 0) {
                 break;
