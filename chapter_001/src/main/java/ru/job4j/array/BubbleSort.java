@@ -10,7 +10,7 @@ package ru.job4j.array;
 public class BubbleSort {
 
     /**
-     * sort
+     * sort method
      *
      * @param array - array for sort
      * @return sorted array
@@ -18,7 +18,7 @@ public class BubbleSort {
     public int[] sort(int[] array) {
         int[] resArray = array;
         for (int i = 0; i < resArray.length; i++) {
-            for (int j = 0; j < resArray.length - 1; j++) {
+            for (int j = 0; j < resArray.length - 1 - i; j++) {
                 if (resArray[j] > resArray[j + 1]) {
                     int tmp = resArray[j];
                     resArray[j] = resArray[j + 1];
