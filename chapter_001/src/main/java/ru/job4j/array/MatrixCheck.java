@@ -18,12 +18,10 @@ public class MatrixCheck {
     public boolean mono(boolean[][] data) {
         boolean result = true;
         int size = data.length;
-        for (int i = 0; result & i < size - 1; i++) {
-            result = data[i][i] == data[i + 1][i + 1];
+        for (int i = 0; i < size - 1; i++) {
+            result = data[i][i] == data[i + 1][i + 1] && data[i][size - 1 - i] == data[i + 1][size - 1 - (i + 1)];
             if (!result) {
                 break;
-            } else {
-                result = data[i][size - 1 - i] == data[i + 1][size - 1 - (i + 1)];
             }
         }
         return result;
