@@ -16,6 +16,7 @@
 
     <modules>
         <module>chapter_001</module>
+		<module>games_oop_javafx-master</module>
     </modules>
 
     
