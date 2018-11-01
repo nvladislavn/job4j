@@ -18,7 +18,7 @@ public class FactorialTest {
      * Test calc method when factorial for 5
      */
     @Test
-    public void whenFactorialForFiveThenOneHundreedTwenty() {
+    public void whenFactorialForFiveThenOneHundredTwenty() {
         Factorial fact = new Factorial();
         assertThat(fact.calc(5), is(120));
     }

@@ -39,8 +39,7 @@ public class Triangle {
         double ab = this.a.distanceTo(this.b);
         double ac = this.a.distanceTo(this.c);
         double bc = this.b.distanceTo(this.c);
-        double per = this.period(ab, ac, bc); //эту строку кода, по-моему, лучше перенести в блок if,
-        //чтобы не делать лишних вычислений, если проверка на существование треугольника не пройдет.
+        double per = this.period(ab, ac, bc);
         if (this.exist(ab, ac, bc)) {
             result = Math.sqrt(per * (per - ab) * (per - ac) * (per - bc));
         }
@@ -50,9 +49,9 @@ public class Triangle {
     /**
      * Проверка на существование треугольника
      *
-     * @param ab
-     * @param ac
-     * @param bc
+     * @param ab - сторона треугольника.
+     * @param ac - сторона треугольника.
+     * @param bc - сторона треугольника.
      * @return Существует
      */
     private boolean exist(double ab, double ac, double bc) {

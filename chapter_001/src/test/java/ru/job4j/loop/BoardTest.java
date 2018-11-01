@@ -35,5 +35,4 @@ public class BoardTest {
         String ln = System.lineSeparator();
         assertThat(result, is(String.format("X X X%s X X %sX X X%s X X %s", ln, ln, ln, ln)));
     }
-
 }
