@@ -5,9 +5,9 @@ package ru.job4j.calculator;
  */
 public class Fit {
 
-    private final double MAN_S_SUBTRAHEND = 100;
-    private final double WOMAN_S_SUBTRAHEND = 110;
-    private final double COEFFICIENT = 1.15;
+    private final double mansSubtrahend = 100;
+    private final double womansSubtrahend = 110;
+    private final double coefficient = 1.15;
 
     /**
      * Идеальный вес для мужчины.
@@ -15,7 +15,7 @@ public class Fit {
      * @return идеальный вес.
      */
     public double manWeight(double height) {
-        return ((height - MAN_S_SUBTRAHEND) * COEFFICIENT);
+        return ((height - mansSubtrahend) * coefficient);
     }
 
     /**
@@ -24,7 +24,7 @@ public class Fit {
      * @return идеальный вес.
      */
     public double womanWeight(double height) {
-        return ((height - WOMAN_S_SUBTRAHEND) * COEFFICIENT);
+        return ((height - womansSubtrahend) * coefficient);
     }
 
     /**
@@ -33,7 +33,7 @@ public class Fit {
      * @return рост.
      */
     public double manHeight(double weight) {
-        return ((weight + MAN_S_SUBTRAHEND * COEFFICIENT) / COEFFICIENT);
+        return ((weight + mansSubtrahend * coefficient) / coefficient);
     }
 
     /**
@@ -42,6 +42,6 @@ public class Fit {
      * @return рост.
      */
     public double womanHeight(double weight) {
-        return ((weight + WOMAN_S_SUBTRAHEND * COEFFICIENT) / COEFFICIENT);
+        return ((weight + womansSubtrahend * coefficient) / coefficient);
     }
 }

@@ -33,19 +33,16 @@ public class MergingSortedArrays {
             }
             indexRes++;
         }
-
         while (indexFirst < firstLength) {
             resultArray[indexRes] = firstArray[indexFirst];
             indexFirst++;
             indexRes++;
         }
-
         while (indexSec < secondLength) {
             resultArray[indexRes] = secondArray[indexRes];
             indexSec++;
             indexRes++;
         }
-
         return resultArray;
     }
 }

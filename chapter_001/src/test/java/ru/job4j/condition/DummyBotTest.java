@@ -7,36 +7,36 @@ import static org.junit.Assert.assertThat;
 
 public class DummyBotTest {
 
-    private final String SAY_HELLO = "Привет, Бот.";
-    private final String SAY_BY = "Пока.";
-    private final String ANSWER_HELLO = "Привет, умник.";
-    private final String ANSWER_BY = "До скорой встречи.";
-    private final String ANSWER_OTHER = "Это ставит меня в тупик. Задайте другой вопрос.";
+    private final String sayHello = "Привет, Бот.";
+    private final String sayBy = "Пока.";
+    private final String answerHello = "Привет, умник.";
+    private final String answerBy = "До скорой встречи.";
+    private final String answerOther = "Это ставит меня в тупик. Задайте другой вопрос.";
 
     /**
      * Test answer with "Привет, Бот."
      */
     @Test
-    public void WhenHelloBotThenHello() {
+    public void whenHelloBotThenHello() {
         DummyBot bot = new DummyBot();
-        assertThat(bot.answer(SAY_HELLO), is(ANSWER_HELLO));
+        assertThat(bot.answer(sayHello), is(answerHello));
     }
 
     /**
      * Test answer with "Пока."
      */
     @Test
-    public void WhenByThenBy() {
+    public void whenByThenBy() {
         DummyBot bot = new DummyBot();
-        assertThat(bot.answer(SAY_BY), is(ANSWER_BY));
+        assertThat(bot.answer(sayBy), is(answerBy));
     }
 
     /**
      * Test answer with "Другое"
      */
     @Test
-    public void WhenOther() {
+    public void whenOther() {
         DummyBot bot = new DummyBot();
-        assertThat(bot.answer("Other"), is(ANSWER_OTHER));
+        assertThat(bot.answer("Other"), is(answerOther));
     }
 }
