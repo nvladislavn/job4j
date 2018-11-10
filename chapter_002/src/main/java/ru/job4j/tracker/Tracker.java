@@ -41,7 +41,7 @@ public class Tracker {
     }
 
     /**
-     * replace. This method changes the id of item.
+     * replace. This method changes item with the given id.
      *
      * @param id
      * @param item

@@ -32,7 +32,7 @@ public class TrackerTest {
     }
 
     /**
-     * Tests the method replace
+     * Tests the method replace from the Example
      */
     @Test
     public void whenReplaceNameThenReturnNewName() {
@@ -43,6 +43,21 @@ public class TrackerTest {
         next.setId(previous.getId());
         tracker.replace(previous.getId(), next);
         assertThat(tracker.findById(previous.getId()).getName(), is("test2"));
+    }
+
+    /**
+     * Tests the method replace
+     */
+    @Test
+    public void whenReplaceItemThenReturnNewItemName() {
+        Tracker tracker = createTracker();
+        Item replacement = new Item("replacement", "replacementDescription", 12345L);
+        String indexSecond = secondItem.getId();
+        replacement.setId(indexSecond);
+        tracker.replace(indexSecond, replacement);
+        Item[] actuallyArray = tracker.findAll();
+        Item[] expectedArray = {firstItem, replacement, thirdItem, fourthItem};
+        assertThat(actuallyArray, arrayContainingInAnyOrder(expectedArray));
     }
 
     /**
