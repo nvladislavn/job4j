@@ -63,9 +63,9 @@ public class TrackerTest {
     @Test
     public void shouldBeReturnWithoutNull() {
         Tracker tracker = createTracker();
-        tracker.replace(secondItem.getId(), null);
+        tracker.add(null);
         Item[] actuallyArray = tracker.findAll();
-        Item[] expectedArray = {firstItem, thirdItem, fourthItem};
+        Item[] expectedArray = {firstItem, secondItem, thirdItem, fourthItem};
         assertThat(actuallyArray, arrayContainingInAnyOrder(expectedArray));
     }
 
