@@ -46,12 +46,15 @@ public class Tracker {
      * @param id
      * @param item
      */
-    public void replace(String id, Item item) {
+    public boolean replace(String id, Item item) {
+        boolean result = false;
         int index = findIndexById(id);
         if (index != -1) {
             item.setId(id);
             items[index] = item;
+            result = true;
         }
+        return result;
     }
 
     /**
@@ -59,12 +62,15 @@ public class Tracker {
      *
      * @param id
      */
-    public void delete(String id) {
+    public boolean delete(String id) {
+        boolean result = false;
         int delIndex = findIndexById(id);
         if (delIndex != -1) {
             System.arraycopy(items, delIndex + 1, items, delIndex, items.length - 1 - delIndex);
             position--;
+            result = true;
         }
+        return result;
     }
 
     /**

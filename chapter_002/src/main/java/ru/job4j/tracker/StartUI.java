@@ -87,18 +87,17 @@ public class StartUI {
      */
     private void findByName() {
         System.out.println("---------------Search application by name---------------");
-        showAll();
         String name = input.ask("Please enter the name of the application you want to found:");
         Item[] array = tracker.findByName(name);
         if (array.length == 0) {
             System.out.println("No applications with the given name were found!");
-            return;
+        } else {
+            System.out.println("The applications were found: ");
+            for (Item item : array) {
+                System.out.println(item.toString());
+            }
+            System.out.println("\n\n");
         }
-        System.out.println("The applications were found: ");
-        for (Item item : array) {
-            System.out.println(item.toString());
-        }
-        System.out.println("\n\n");
     }
 
     /**
@@ -106,14 +105,13 @@ public class StartUI {
      */
     private void findById() {
         System.out.println("---------------Search application by id---------------");
-        showAll();
         String id = input.ask("Please enter the id of the application you want to found:");
         Item item = tracker.findById(id);
         if (item == null) {
             System.out.println("An application with the given id was not found!");
-            return;
+        } else {
+            System.out.println("Was found the application: " + item.toString() + "\n\n");
         }
-        System.out.println("Was found the application: " + item.toString() + "\n\n");
     }
 
 
@@ -122,10 +120,12 @@ public class StartUI {
      */
     private void deleteItem() {
         System.out.println("---------------Deleting item---------------");
-        showAll();
         String id = input.ask("Please enter the id of the application you want to find:");
-        Item item = tracker.findById(id);
-        System.out.println("Application deleted.\n\n");
+        if (tracker.delete(id)) {
+            System.out.println("Application deleted.\n\n");
+        } else {
+            System.out.println("Application not found.");
+        }
     }
 
     /**
@@ -133,20 +133,16 @@ public class StartUI {
      */
     private void editItem() {
         System.out.println("---------------Editing item---------------");
-        showAll();
         String id = input.ask("Please enter the id of the application you want to edit:");
-        Item item = tracker.findById(id);
-        if (item == null) {
-            System.out.println("An application with the given id was not found!");
-            return;
-        }
-        System.out.println("Found the item: " + item.toString() + "\nPlease enter new requisite found item");
         String newName = input.ask("Please enter a new name: ");
         String newDesc = input.ask("Please enter a new description: ");
         Item newItem = new Item(newName, newDesc);
         newItem.setId(id);
-        tracker.replace(id, newItem);
-        System.out.println("Application editing is complete.\n\n");
+        if (tracker.replace(id, newItem)) {
+            System.out.println("Application editing is complete.\n\n");
+        } else {
+            System.out.println("Application not found.");
+        }
     }
 
     /**
@@ -156,13 +152,13 @@ public class StartUI {
         Item[] array = tracker.findAll();
         if (array.length == 0) {
             System.out.println("No application has been created yet.\n\n");
-            return;
+        } else {
+            System.out.println("---------------List of all applications---------------");
+            for (Item item : array) {
+                System.out.println(item.toString());
+            }
+            System.out.println("\n");
         }
-        System.out.println("---------------List of all applications---------------");
-        for (Item item : array) {
-            System.out.println(item.toString());
-        }
-        System.out.println("\n");
     }
 
     /**

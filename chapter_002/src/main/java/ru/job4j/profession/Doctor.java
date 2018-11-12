@@ -16,10 +16,11 @@ public class Doctor extends Profession {
 
     /**
      * cure method
+     *
      * @param patient
      * @return when curing is successful then true, else false.
      */
-    public boolean cure (Patient patient) {
+    public boolean cure(Patient patient) {
         return true;
     }
 }
