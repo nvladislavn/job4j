@@ -13,6 +13,11 @@ public class Item {
     private long created;
     private String[] comments;
 
+    public Item(String name, String desc) {
+        this.name = name;
+        this.desc = desc;
+    }
+
     public Item(String name, String desc, long created) {
         this.name = name;
         this.desc = desc;
@@ -43,4 +48,10 @@ public class Item {
         this.desc = desc;
     }
 
+    @Override
+    public String toString() {
+        return ("Item with name: " + name
+                + ", id: " + id
+                + ", description: " + desc);
+    }
 }
