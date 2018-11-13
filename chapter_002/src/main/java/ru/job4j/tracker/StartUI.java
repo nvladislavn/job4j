@@ -16,7 +16,7 @@ public class StartUI {
     private static final String FIND_BY_ID = "4";
     private static final String FIND_BY_NAME = "5";
     private static final String EXIT = "6";
-    private final ConsoleInput input;
+    private final Input input;
     private final Tracker tracker;
     private boolean exit;
 
@@ -26,7 +26,7 @@ public class StartUI {
      * @param input   - an instance of ConsoleInput class.
      * @param tracker - an instance of Tracker class.
      */
-    public StartUI(ConsoleInput input, Tracker tracker) {
+    public StartUI(Input input, Tracker tracker) {
         this.input = input;
         this.tracker = tracker;
     }
@@ -65,6 +65,7 @@ public class StartUI {
                 case EXIT:
                     exitProgram();
                     break;
+                    default:
             }
         }
     }
@@ -120,7 +121,7 @@ public class StartUI {
      */
     private void deleteItem() {
         System.out.println("---------------Deleting item---------------");
-        String id = input.ask("Please enter the id of the application you want to find:");
+        String id = input.ask("Please enter the id of the application you want to delete:");
         if (tracker.delete(id)) {
             System.out.println("Application deleted.\n\n");
         } else {
