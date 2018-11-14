@@ -2,6 +2,8 @@ package ru.job4j.tracker;
 
 import org.junit.Test;
 
+import java.util.Arrays;
+
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.*;
 
@@ -14,34 +16,32 @@ import static org.junit.Assert.*;
  */
 public class StartUITest {
 
-    Tracker tracker;
-    StubInput stubInput;
-
     /**
      * Tests add.
      */
     @Test
-    public void whenAddItemThenTrackerHasNewItemWithSameName() {
-        tracker = new Tracker();
-        runStartUI(new String[]{"0", "Test name", "Test description", "6", "y"});
-        assertThat(tracker.findAll()[0].getName(), is("Test name"));
+    public void whenAddItemThenTrackerHasNewItem() {
+        Tracker tracker = new Tracker();
+        String name = "Test name";
+        String desc = "Test description";
+        runStartUI(tracker, new String[]{"0", name, desc, "6", "y"});
+        Item item = new Item(name, desc);
+        item.setId(tracker.findAll()[0].getId());
+        Item[] expected = {item};
+        Item[] actual = tracker.findAll();
+        assertThat(actual, is(expected));
     }
 
     /**
      * Tests findAll.
-     * В задании написано, не делать тест этого метода, но т.к. в "азарте" )) я его все-таки сделал, то решил оставить.
+     * В задании написано, не делать тест этого метода, но т.к. я его случайно все-таки сделал, то решил оставить.
      */
     @Test
-    public void whenFindNonNullItemsThenGetArrayOfFoundItemsNameAndDescription() {
-        createTracker();
-        runStartUI(new String[]{"1", "6", "y"});
-        String[] expected = {"Test name1, Test description1",
-                            "Test name2, Test description2",
-                            "Test name3, Test description3"};
-        Item[] findArray = tracker.findAll();
-        String[] actual = {findArray[0].getName() + ", " + findArray[0].getDesc(),
-                findArray[1].getName() + ", " + findArray[1].getDesc(),
-                findArray[2].getName() + ", " + findArray[2].getDesc()};
+    public void whenFindNonNullItemsThenGetArrayOfFoundNonNullItems() {
+        Tracker tracker = createTracker();
+        Item[] expected = tracker.findAll();
+        runStartUI(tracker, new String[]{"1", "6", "y"});
+        Item[] actual = tracker.findAll();
         assertThat(actual, is(expected));
     }
 
@@ -49,27 +49,43 @@ public class StartUITest {
      * Tests editItem.
      */
     @Test
-    public void whenEnterNewNameThenGetNewName() {
-        createTracker();
-        runStartUI(new String[]{"2", tracker.findAll()[0].getId(),
-                                "NEW name", "NEW description",
-                                "6", "y"});
-        String expected = "NEW name, NEW description";
-        Item[] findArray = tracker.findAll();
-        String actual = findArray[0].getName() + ", " + findArray[0].getDesc();
+    public void whenReplaceItemInArrayThenGetArrayWithNewItem() {
+        Tracker tracker = createTracker();
+        Item[] items = tracker.findAll();
+        Item item2 = new Item("NEW name", "NEW description");
+        item2.setId(tracker.findByName("Test name2")[0].getId());
+        Item[] expected = {items[0], item2, items[2]};
+        runStartUI(tracker, new String[]{"2", tracker.findAll()[1].getId(),
+                                        "NEW name", "NEW description",
+                                        "6", "y"});
+        Item[] actual = tracker.findAll();
         assertThat(actual, is(expected));
     }
 
     /**
-     * Tests deleteItem.
+     * Tests deleteItem v.1.
      */
     @Test
     public void whenDeleteTheItemWhenReturnNull() {
-        createTracker();
+        Tracker tracker = createTracker();
         String id = tracker.findAll()[1].getId();
-        runStartUI(new String[]{"3", id, "6", "y"});
+        runStartUI(tracker, new String[]{"3", id, "6", "y"});
         Item actual = tracker.findById(id);
         assertThat(actual, is((Item) null));
+    }
+
+    /**
+     * Tests deleteItem v.2.
+     */
+    @Test
+    public void whenDeleteTheItemWhenReturnArrayWithoutItem() {
+        Tracker tracker = createTracker();
+        Item[] items = tracker.findAll();
+        Item[] expected = Arrays.copyOf(items, items.length - 1);
+        String id = items[2].getId();
+        runStartUI(tracker, new String[]{"3", id, "6", "y"});
+        Item[] actual = tracker.findAll();
+        assertThat(actual, is(expected));
     }
 
     /**
@@ -77,18 +93,19 @@ public class StartUITest {
      *
      * @param commands - sequence of commands.
      */
-    private void runStartUI(String[] commands) {
-        stubInput = new StubInput(commands);
+    private void runStartUI(Tracker tracker, String[] commands) {
+        StubInput stubInput = new StubInput(commands);
         new StartUI(stubInput, tracker).init();
     }
 
     /**
      * createTracker - service method to create an instance Tracker.
      */
-    private void createTracker() {
-        tracker = new Tracker();
+    private Tracker createTracker() {
+        Tracker tracker = new Tracker();
         tracker.add(new Item("Test name1", "Test description1"));
         tracker.add(new Item("Test name2", "Test description2"));
         tracker.add(new Item("Test name3", "Test description3"));
+        return tracker;
     }
 }
