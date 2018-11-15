@@ -1,5 +1,7 @@
 package ru.job4j.drawing;
 
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 
 import java.io.ByteArrayOutputStream;
@@ -13,14 +15,26 @@ import static org.junit.Assert.*;
  */
 public class PaintTest {
 
+    private PrintStream stdOut;
+    private ByteArrayOutputStream baos;
+
+    @Before
+    public void loadInput() {
+        stdOut = System.out;
+        baos = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(baos));
+    }
+
+    @After
+    public void backOut() {
+        System.setOut(stdOut);
+    }
+
     /**
      * Tests draw when draws a square.
      */
     @Test
     public void whenDrawSquare() {
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        PrintStream stdOut = System.out;
-        System.setOut(new PrintStream(baos));
         new Paint().draw(new Square());
         String expected = new StringBuilder("+++++++\n"
                                             + "+++++++\n"
@@ -31,7 +45,6 @@ public class PaintTest {
                                             + "+++++++\n")
                                             .toString();
         assertThat(baos.toString(), is(expected));
-        System.setOut(stdOut);
     }
 
     /**
@@ -39,12 +52,8 @@ public class PaintTest {
      */
     @Test
     public void whenDrawTriangle() {
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        PrintStream stdOut = System.out;
-        System.setOut(new PrintStream(baos));
         new Paint().draw(new Triangle());
         String expected = "   +   \n  +++  \n +++++ \n+++++++\n";
         assertThat(baos.toString(), is(expected));
-        System.setOut(stdOut);
     }
 }
