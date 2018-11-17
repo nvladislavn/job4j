@@ -33,19 +33,6 @@ public class StartUITest {
     }
 
     /**
-     * Tests findAll.
-     * В задании написано, не делать тест этого метода, но т.к. я его случайно все-таки сделал, то решил оставить.
-     */
-    @Test
-    public void whenFindNonNullItemsThenGetArrayOfFoundNonNullItems() {
-        Tracker tracker = createTracker();
-        Item[] expected = tracker.findAll();
-        runStartUI(tracker, new String[]{"1", "6", "y"});
-        Item[] actual = tracker.findAll();
-        assertThat(actual, is(expected));
-    }
-
-    /**
      * Tests editItem.
      */
     @Test
