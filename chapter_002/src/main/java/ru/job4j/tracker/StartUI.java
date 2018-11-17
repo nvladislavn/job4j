@@ -65,7 +65,7 @@ public class StartUI {
                 case EXIT:
                     exitProgram();
                     break;
-                    default:
+                default:
             }
         }
     }
@@ -76,7 +76,7 @@ public class StartUI {
     private void exitProgram() {
         String answer = input.ask("Do you want to exit the program? (y/n)");
         if (answer.toLowerCase().equals("y")) {
-            System.out.print("The program is completed.\n");
+            System.out.print("The program is completed." + System.lineSeparator());
             exit = true;
         } else if (!answer.toLowerCase().equals("y") && !answer.toLowerCase().equals("n")) {
             exitProgram();
@@ -87,17 +87,17 @@ public class StartUI {
      * findByName. This method shows an application array with the given name.
      */
     private void findByName() {
-        System.out.print("---------------Search application by name---------------\n");
+        System.out.print("---------------Search application by name---------------" + System.lineSeparator());
         String name = input.ask("Please enter the name of the application you want to found:");
         Item[] array = tracker.findByName(name);
         if (array.length == 0) {
-            System.out.print("No applications with the given name were found!\n");
+            System.out.print("No applications with the given name were found!" + System.lineSeparator());
         } else {
-            System.out.print("The applications were found: \n");
+            System.out.print("The applications were found: " + System.lineSeparator());
             for (Item item : array) {
-                System.out.print(item.toString() + "\n");
+                System.out.print(item.toString() + System.lineSeparator());
             }
-            System.out.print("\n\n");
+            System.out.print(System.lineSeparator());
         }
     }
 
@@ -105,13 +105,13 @@ public class StartUI {
      * findById. This method shows an application with the given id.
      */
     private void findById() {
-        System.out.print("---------------Search application by id---------------\n");
+        System.out.print("---------------Search application by id---------------" + System.lineSeparator());
         String id = input.ask("Please enter the id of the application you want to found:");
         Item item = tracker.findById(id);
         if (item == null) {
-            System.out.print("An application with the given id was not found!\n");
+            System.out.print("An application with the given id was not found!" + System.lineSeparator());
         } else {
-            System.out.print("Was found the application: " + item.toString() + "\n\n");
+            System.out.print("Was found the application: " + item.toString() + System.lineSeparator() + System.lineSeparator());
         }
     }
 
@@ -120,12 +120,12 @@ public class StartUI {
      * deleteItem. This method deletes an application with the given id.
      */
     private void deleteItem() {
-        System.out.println("---------------Deleting item---------------");
+        System.out.print("---------------Deleting item---------------" + System.lineSeparator());
         String id = input.ask("Please enter the id of the application you want to delete:");
         if (tracker.delete(id)) {
-            System.out.print("Application deleted.\n\n");
+            System.out.print("Application deleted." + System.lineSeparator() + System.lineSeparator());
         } else {
-            System.out.print("Application not found.\n");
+            System.out.print("Application not found." + System.lineSeparator());
         }
     }
 
@@ -133,16 +133,16 @@ public class StartUI {
      * editItem. This method changes the application with the specified id to the new one.
      */
     private void editItem() {
-        System.out.println("---------------Editing item---------------");
+        System.out.print("---------------Editing item---------------" + System.lineSeparator());
         String id = input.ask("Please enter the id of the application you want to edit:");
         String newName = input.ask("Please enter a new name: ");
         String newDesc = input.ask("Please enter a new description: ");
         Item newItem = new Item(newName, newDesc);
         newItem.setId(id);
         if (tracker.replace(id, newItem)) {
-            System.out.print("Application editing is complete.\n\n");
+            System.out.print("Application editing is complete." + System.lineSeparator() + System.lineSeparator());
         } else {
-            System.out.print("Application not found.\n");
+            System.out.print("Application not found." + System.lineSeparator());
         }
     }
 
@@ -152,13 +152,13 @@ public class StartUI {
     private void showAll() {
         Item[] array = tracker.findAll();
         if (array.length == 0) {
-            System.out.print("No application has been created yet.\n\n");
+            System.out.print("No application has been created yet." + System.lineSeparator() + System.lineSeparator());
         } else {
-            System.out.print("---------------List of all applications---------------\n");
+            System.out.print("---------------List of all applications---------------" + System.lineSeparator());
             for (Item item : array) {
-                System.out.print(item.toString() + "\n");
+                System.out.print(item.toString() + System.lineSeparator());
             }
-            System.out.print("\n");
+            System.out.print(System.lineSeparator());
         }
     }
 
@@ -166,25 +166,26 @@ public class StartUI {
      * createItem. This method creates and saves a new application.
      */
     private void createItem() {
-        System.out.println("---------------Adding item---------------");
+        System.out.print("---------------Adding item---------------" + System.lineSeparator());
         String name = input.ask("Please enter the name of your application:");
         String desc = input.ask("Please enter the description of your application:");
         Item item = new Item(name, desc);
         tracker.add(item);
-        System.out.print("Created a new application " + item.toString() + "\n\n");
+        System.out.print("Created a new application " + item.toString() + System.lineSeparator() + System.lineSeparator());
     }
 
     /**
      * showMenu. This method displays the main program menu.
      */
     private void showMenu() {
-        System.out.print("-------------------\nProgram menu" + "\n-------------------\n");
-        System.out.print("0. Add new item\n");
-        System.out.print("1. Show all items\n");
-        System.out.print("2. Edit item\n");
-        System.out.print("3. Delete item\n");
-        System.out.print("4. Find by id\n");
-        System.out.print("5. Find by name\n");
-        System.out.print("6. Exit the Program\n");
+        System.out.print("-------------------" + System.lineSeparator() + "Program menu"
+                + System.lineSeparator() + "-------------------" + System.lineSeparator());
+        System.out.print("0. Add new item" + System.lineSeparator());
+        System.out.print("1. Show all items" + System.lineSeparator());
+        System.out.print("2. Edit item" + System.lineSeparator());
+        System.out.print("3. Delete item" + System.lineSeparator());
+        System.out.print("4. Find by id" + System.lineSeparator());
+        System.out.print("5. Find by name" + System.lineSeparator());
+        System.out.print("6. Exit the Program" + System.lineSeparator());
     }
 }
