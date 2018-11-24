@@ -34,7 +34,10 @@ public class MenuTracker {
         this.actions[3] = this.new DeleteItem();
         this.actions[4] = this.new FindById();
         this.actions[5] = new FindByName();
+    }
 
+    public int getActionLength() {
+        return this.actions.length;
     }
 
     /**
@@ -196,8 +199,6 @@ public class MenuTracker {
             return "5. Show an application with the given id.";
         }
     }
-
-
 }
 
 /**

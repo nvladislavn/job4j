@@ -25,4 +25,25 @@ public class ConsoleInput implements Input {
         return scanner.nextLine();
     }
 
+    /**
+     * ask. This method displays the message to the user and returns its response.
+     * @param message - the message to the user.
+     * @param range - an array with the range of menu items.
+     * @return - the user's response.
+     */
+    @Override
+    public int ask(String message, int[] range) {
+        int key = Integer.valueOf(this.ask(message));
+        boolean exist = false;
+        for (int item : range) {
+            if (key == item) {
+                exist = true;
+            }
+        }
+        if (exist) {
+            return key;
+        } else {
+            throw new MenuOutException("Out of menu range.");
+        }
+    }
 }
