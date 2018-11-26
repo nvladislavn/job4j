@@ -15,7 +15,7 @@ import static org.junit.Assert.*;
  *
  * @author Vladislav Nechaev
  * @version $Id$
- * @since 16.11.2018
+ * @since 26.11.2018
  */
 public class ValidateInputTest {
 
@@ -49,7 +49,7 @@ public class ValidateInputTest {
     @Test
     public void whenKeyIsOutOfRange() {
        ValidateInput input = new ValidateInput(new StubInput(new String[] {"1", "2"}));
-       input.ask("Ten", new int[] {10});
-        assertThat(this.baos.toString(), is("Please select key from menu."));
+       input.ask("Ten", new int[] {2});
+        assertThat(this.baos.toString(), is("Please select key from menu." + System.lineSeparator()));
     }
 }
