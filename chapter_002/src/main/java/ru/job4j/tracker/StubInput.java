@@ -29,6 +29,11 @@ public class StubInput implements Input {
 
     @Override
     public int ask(String message, int[] range) {
-        return -1;
+        int res = Integer.valueOf(this.ask(message));
+        if (res >= 0 && res <= range.length) {
+            return res;
+        } else {
+            throw new MenuOutException("Out of menu range.");
+        }
     }
 }

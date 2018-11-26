@@ -57,7 +57,7 @@ public class TrackerTest {
         tracker.replace(indexSecond, replacement);
         Item[] actuallyArray = tracker.findAll();
         Item[] expectedArray = {firstItem, replacement, thirdItem, fourthItem};
-        assertThat(actuallyArray, arrayContainingInAnyOrder(expectedArray));
+        assertThat(actuallyArray, arrayContainingInAnyOrder(expectedArray)); 
     }
 
     /**

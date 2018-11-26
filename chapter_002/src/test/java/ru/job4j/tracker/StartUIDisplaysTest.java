@@ -29,6 +29,7 @@ public class StartUIDisplaysTest {
             + "4. Find by id" + System.lineSeparator()
             + "5. Find by name" + System.lineSeparator()
             + "6. Exit the Program" + System.lineSeparator();
+    private String endRow = "The program is completed." + System.lineSeparator();
     private Tracker tracker;
     private PrintStream stdout;
     private ByteArrayOutputStream baos;
@@ -66,7 +67,7 @@ public class StartUIDisplaysTest {
                 + "Item with name: Test name3, id: " + items[2].getId() + ", description: Test description3" + System.lineSeparator()
                 + System.lineSeparator()
                 + menu
-                + "The program is completed." + System.lineSeparator();
+                + endRow;
         runStartUI(tracker, new String[]{"1", "6", "y"});
         assertThat(baos.toString(), is(expected));
     }
@@ -83,7 +84,7 @@ public class StartUIDisplaysTest {
                 + "Item with name: Test name2, id: " + item.getId() + ", description: Test description2" + System.lineSeparator()
                 + System.lineSeparator()
                 + menu
-                + "The program is completed." + System.lineSeparator();
+                + endRow;
         runStartUI(tracker, new String[]{"5", "Test name2", "6", "y"});
         assertThat(baos.toString(), is(expected));
     }
@@ -101,7 +102,7 @@ public class StartUIDisplaysTest {
                 + ", description: Test description2" + System.lineSeparator()
                 + System.lineSeparator()
                 + menu
-                + "The program is completed." + System.lineSeparator();
+                + endRow;
         runStartUI(tracker, new String[]{"4", id, "6", "y"});
         assertThat(baos.toString(), is(expected));
     }

@@ -7,7 +7,18 @@ package ru.job4j.tracker;
  * @version $Id$
  * @since 24.11.2018
  */
-public class ValidateInput extends ConsoleInput {
+public class ValidateInput implements Input {
+
+    private Input input;
+
+    public ValidateInput(Input input) {
+        this.input = input;
+    }
+
+    @Override
+    public String ask(String message) {
+        return this.input.ask(message);
+    }
 
     /**
      * ask. This method displays the message to the user and returns its response.
@@ -21,7 +32,7 @@ public class ValidateInput extends ConsoleInput {
         int res = -1;
         do {
             try {
-                res = super.ask(message, range);
+                res = this.input.ask(message, range);
                 invalid = false;
             } catch (MenuOutException moe) {
                 System.out.println("Please select key from menu.");
