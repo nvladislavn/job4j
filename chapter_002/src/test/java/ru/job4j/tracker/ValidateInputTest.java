@@ -41,8 +41,15 @@ public class ValidateInputTest {
      */
     @Test
     public void whenInvalidInput() {
-        Input input = new ValidateInput(new StubInput(new String[] {"invalid", "1"}));
+        ValidateInput input = new ValidateInput(new StubInput(new String[] {"invalid", "1"}));
         input.ask("One", new int[] {1});
         assertThat(this.baos.toString(), is("Please enter validate data again." + System.lineSeparator()));
+    }
+
+    @Test
+    public void whenKeyIsOutOfRange() {
+       ValidateInput input = new ValidateInput(new StubInput(new String[] {"1", "2"}));
+       input.ask("Ten", new int[] {10});
+        assertThat(this.baos.toString(), is("Please select key from menu."));
     }
 }
