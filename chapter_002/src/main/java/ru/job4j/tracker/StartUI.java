@@ -42,7 +42,7 @@ public class StartUI {
         int[] range = new int[actionLength];
         menuTracker.fillActions();
         for (int i = 0; i < actionLength; i++) {
-            range[i] = i + 1;
+            range[i] = i;
         }
         do {
             menuTracker.show();

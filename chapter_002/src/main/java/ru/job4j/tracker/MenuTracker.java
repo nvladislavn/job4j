@@ -28,12 +28,12 @@ public class MenuTracker {
      * This method fills an actions array.
      */
     public void fillActions() {
-        this.actions[0] = this.new AddItem();
-        this.actions[1] = new MenuTracker.ShowAll();
-        this.actions[2] = this.new EditItem();
-        this.actions[3] = this.new DeleteItem();
-        this.actions[4] = this.new FindById();
-        this.actions[5] = new FindByName();
+        this.actions[0] = this.new AddItem(ADD,"AddItem");
+        this.actions[1] = new MenuTracker.ShowAll(SHOW_ALL, "ShowAll");
+        this.actions[2] = this.new EditItem(EDIT, "EditItem");
+        this.actions[3] = this.new DeleteItem(DELETE, "DeleteItem");
+        this.actions[4] = this.new FindById(FIND_BY_ID, "FindById");
+        this.actions[5] = new FindByName(FIND_BY_NAME, "FindByName");
     }
 
     public int getActionLength() {
@@ -46,7 +46,7 @@ public class MenuTracker {
      * @param key - the number of the menu item.
      */
     public void select(int key) {
-        this.actions[key - 1].execute(input, tracker);
+        this.actions[key].execute(input, tracker);
     }
 
     /**
@@ -63,11 +63,10 @@ public class MenuTracker {
     /**
      * AddItem.
      */
-    public class AddItem implements UserAction {
+    public class AddItem extends BaseAction {
 
-        @Override
-        public String key() {
-            return ADD;
+        public AddItem(String key, String name) {
+            super(key, name);
         }
 
         @Override
@@ -79,21 +78,15 @@ public class MenuTracker {
             tracker.add(item);
             System.out.println("Created a new application " + item.toString() + System.lineSeparator());
         }
-
-        @Override
-        public String info() {
-            return "1. Add a new application.";
-        }
     }
 
     /**
      * ShowAll.
      */
-    public static class ShowAll implements UserAction {
+    public static class ShowAll extends BaseAction {
 
-        @Override
-        public String key() {
-            return SHOW_ALL;
+        public ShowAll(String key, String name) {
+            super(key, name);
         }
 
         @Override
@@ -109,20 +102,15 @@ public class MenuTracker {
                 System.out.println();
             }
         }
-
-        @Override
-        public String info() {
-            return "2. Display all items.";
-        }
     }
 
     /**
      * EditItem.
      */
-    public class EditItem implements UserAction {
-        @Override
-        public String key() {
-            return EDIT;
+    public class EditItem extends BaseAction {
+
+        public EditItem(String key, String name) {
+            super(key, name);
         }
 
         @Override
@@ -139,20 +127,15 @@ public class MenuTracker {
                 System.out.println("Application not found.");
             }
         }
-
-        @Override
-        public String info() {
-            return "3. Change the application with the specified id to the new one";
-        }
     }
 
     /**
      * DeleteItem.
      */
-    public class DeleteItem implements UserAction {
-        @Override
-        public String key() {
-            return DELETE;
+    public class DeleteItem extends BaseAction {
+
+        public DeleteItem(String key, String name) {
+            super(key, name);
         }
 
         @Override
@@ -165,21 +148,15 @@ public class MenuTracker {
                 System.out.println("Application not found.");
             }
         }
-
-        @Override
-        public String info() {
-            return "4. Delete an application.";
-        }
     }
 
     /**
      * FindById.
      */
-    public class FindById implements UserAction {
+    public class FindById extends BaseAction {
 
-        @Override
-        public String key() {
-            return FIND_BY_ID;
+        public FindById(String key, String name) {
+            super(key, name);
         }
 
         @Override
@@ -193,21 +170,16 @@ public class MenuTracker {
                 System.out.println("Was found the application: " + item.toString() + System.lineSeparator());
             }
         }
-
-        @Override
-        public String info() {
-            return "5. Show an application with the given id.";
-        }
     }
 }
 
 /**
  * FindByName.
  */
-class FindByName implements UserAction {
-    @Override
-    public String key() {
-        return "5";
+class FindByName extends BaseAction {
+
+    public FindByName(String key, String name) {
+        super(key, name);
     }
 
     @Override
@@ -224,11 +196,6 @@ class FindByName implements UserAction {
             }
             System.out.println();
         }
-    }
-
-    @Override
-    public String info() {
-        return "6. Show an application array with the given name.";
     }
 }
 

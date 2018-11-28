@@ -9,7 +9,7 @@ package ru.job4j.tracker;
  */
 public interface UserAction {
 
-    String key();
+    String getKey();
 
     void execute(Input input, Tracker tracker);
 
