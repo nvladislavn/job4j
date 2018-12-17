@@ -13,6 +13,7 @@ import static org.junit.Assert.*;
 public class BishopWhiteTest {
 
     /**
+     * arraysShouldBeEqual
      * Tests way when the source cell and the destination cell are on the same diagonal.
      */
     @Test
@@ -24,6 +25,7 @@ public class BishopWhiteTest {
     }
 
     /**
+     * shouldReturnsException
      * Tests way when the source cell and the destination cell are not on the same diagonal.
      */
     @Test

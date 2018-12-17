@@ -4,6 +4,7 @@ public class OccupiedWayException extends RuntimeException {
 
 
     public OccupiedWayException() {
+
     }
 
     public OccupiedWayException(String message) {

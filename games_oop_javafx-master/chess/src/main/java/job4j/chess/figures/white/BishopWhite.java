@@ -5,6 +5,7 @@ import job4j.chess.figures.Cell;
 import job4j.chess.figures.Figure;
 
 /**
+ *BishopWhite
  *
  * @author Petr Arsentev (parsentev@yandex.ru)
  * @version $Id$
@@ -24,13 +25,12 @@ public class BishopWhite implements Figure {
 
     @Override
     public Cell[] way(Cell source, Cell dest) {
-        Cell[] steps = new Cell[0];
         if (!isDiagonal(source, dest)) {
             throw new ImpossibleMoveException("A Bishop can move only diagonally!");
         }
         int deltaX = dest.x - source.x;
         int deltaY = dest.y - source.y;
-        steps = new Cell[Math.abs(deltaX)];
+        Cell[] steps = new Cell[Math.abs(deltaX)];
         for (int i = 1; i <= Math.abs(deltaX); i++) {
             int tempX = source.x + (deltaX > 0 ? i : -i);
             int tempY = source.y + (deltaY > 0 ? i : -i);

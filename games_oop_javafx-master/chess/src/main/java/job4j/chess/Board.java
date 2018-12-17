@@ -14,8 +14,8 @@ public class Board {
     }
 
     public boolean move(Cell source, Cell dest) throws ImpossibleMoveException,
-                                                    OccupiedWayException,
-                                                    FigureNotFoundException {
+                                                        OccupiedWayException,
+                                                        FigureNotFoundException {
         int position = findByCell(source);
         if (position == -1) {
             throw new FigureNotFoundException();
@@ -31,7 +31,7 @@ public class Board {
     private boolean isPossibleWay(Cell[] way) {
         boolean isPossible = true;
         int count = 0;
-        while (isPossible && count < way.length){
+        while (isPossible && count < way.length) {
             for (Figure figure : this.figures) {
                 if (figure != null && figure.position().equals(way[count])) {
                     isPossible = false;
