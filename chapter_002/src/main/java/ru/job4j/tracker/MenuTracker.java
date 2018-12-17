@@ -28,7 +28,7 @@ public class MenuTracker {
      * This method fills an actions array.
      */
     public void fillActions() {
-        this.actions[0] = this.new AddItem(ADD,"AddItem");
+        this.actions[0] = this.new AddItem(ADD, "AddItem");
         this.actions[1] = new MenuTracker.ShowAll(SHOW_ALL, "ShowAll");
         this.actions[2] = this.new EditItem(EDIT, "EditItem");
         this.actions[3] = this.new DeleteItem(DELETE, "DeleteItem");

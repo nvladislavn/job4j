@@ -19,9 +19,7 @@
 		<module>games_oop_javafx-master</module>
 		<module>chapter_002</module>
 	</modules>
-
-    
-	
+ 
 	<dependencies>
 		<dependency>
 			<groupId>org.hamcrest</groupId>
