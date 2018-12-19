@@ -8,15 +8,15 @@ import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.*;
 
 /**
- * BoardTest
+ * LogicTest
  */
-public class BoardTest {
+public class LogicTest {
 
     @Test
     public void whenSourceE2ThenDestinationC4() {
-        Board board = new Board();
-        board.add(new BishopWhite(Cell.E2));
-        assertThat(board.move(Cell.E2, Cell.C4), is(true));
+        Logic logic = new Logic();
+        logic.add(new BishopWhite(Cell.E2));
+        assertThat(logic.move(Cell.E2, Cell.C4), is(true));
 
     }
 }

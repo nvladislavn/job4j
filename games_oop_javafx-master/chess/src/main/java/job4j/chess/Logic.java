@@ -1,5 +1,8 @@
 package job4j.chess;
 
+import job4j.chess.GameException.FigureNotFoundException;
+import job4j.chess.GameException.ImpossibleMoveException;
+import job4j.chess.GameException.OccupiedWayException;
 import job4j.chess.figures.Cell;
 import job4j.chess.figures.Figure;
 
@@ -18,18 +21,48 @@ public class Logic {
         this.figures[this.index++] = figure;
     }
 
-    public boolean move(Cell source, Cell dest) {
-        boolean rst = false;
-        int index = this.findBy(source);
-        if (index != -1) {
-            Cell[] steps = this.figures[index].way(source, dest);
-            if (steps.length > 0 && steps[steps.length - 1].equals(dest)) {
-                rst = true;
-                this.figures[index] = this.figures[index].copy(dest);
-            }
+    public boolean move(Cell source, Cell dest) throws ImpossibleMoveException,
+                                                    OccupiedWayException,
+                                                    FigureNotFoundException {
+        int item = findByCell(source);
+        if (item == -1) {
+            throw new FigureNotFoundException();
         }
-        return rst;
+        Figure figure = this.figures[item];
+        if (!isPossibleWay(figure.way(source, dest))) {
+            throw new OccupiedWayException();
+        }
+        this.figures[item] = figure.copy(dest);
+        return true;
     }
+
+    private boolean isPossibleWay(Cell[] way) {
+        boolean isPossible = true;
+        int count = 0;
+        while (isPossible && count < way.length) {
+            for (Figure figure : this.figures) {
+                if (figure != null && figure.position().equals(way[count])) {
+                    isPossible = false;
+                    break;
+                }
+            }
+            count++;
+        }
+        return isPossible;
+    }
+
+//    public boolean move(Cell source, Cell dest) {
+//        boolean rst = false;
+//        int index = this.findBy(source);
+//        if (index != -1) {
+//            Cell[] steps = this.figures[index].way(source, dest);
+//            if (steps.length > 0 && steps[steps.length - 1].equals(dest)) {
+//                rst = true;
+//                this.figures[index] = this.figures[index].copy(dest);
+//            }
+//        }
+//        return rst;
+//    }
 
     public void clean() {
         for (int position = 0; position != this.figures.length; position++) {
@@ -38,14 +71,31 @@ public class Logic {
         this.index = 0;
     }
 
-    private int findBy(Cell cell) {
-        int rst = -1;
-        for (int index = 0; index != this.figures.length; index++) {
-            if (this.figures[index] != null && this.figures[index].position().equals(cell)) {
-                rst = index;
+    /**
+     * findByCell
+     *
+     * @param source - cell
+     * @return - position of the figure in the figures.
+     */
+    private int findByCell(Cell source) {
+        int res = -1;
+        for (int i = 0; i < this.figures.length; i++) {
+            if (this.figures[i] != null && this.figures[i].position().equals(source)) {
+                res = i;
                 break;
             }
         }
-        return rst;
+        return res;
     }
+
+//    private int findBy(Cell cell) {
+//        int rst = -1;
+//        for (int index = 0; index != this.figures.length; index++) {
+//            if (this.figures[index] != null && this.figures[index].position().equals(cell)) {
+//                rst = index;
+//                break;
+//            }
+//        }
+//        return rst;
+//    }
 }

@@ -14,10 +14,6 @@ import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import job4j.chess.figures.Cell;
 import job4j.chess.figures.Figure;
-import job4j.chess.figures.black.*;
-import job4j.chess.figures.white.*;
-import job4j.chess.figures.black.*;
-import job4j.chess.figures.white.*;
 
 public class Chess extends Application {
     private static final String JOB4J = "Шахматы на www.job4j.ru";
