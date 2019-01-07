@@ -13,9 +13,22 @@ public class MyPriorityQueue {
 
     private LinkedList<Task> tasks = new LinkedList<>();
 
+    /**
+     * put
+     *
+     * adds the instance of Task to tasks
+     * @param task
+     */
     public void put(Task task) {
         tasks.add(task);
-        Collections.sort(tasks, this.new PriorityComparator());
+        if (this.tasks.size() == 0) {
+            this.tasks.add(task);
+        }
+        for (int i = 0; i < this.tasks.size(); i++) {
+            if (task.getPriority() == this.tasks.get(i).getPriority()) {
+                this.tasks.add(i, task);
+            }
+        }
     }
 
     public Task take() {
