@@ -33,6 +33,7 @@ public class ConvertList2Array {
 
     /**
      * convert
+     *
      * convert List of arrays to integer List
      * @param list - List of arrays
      * @return - integer List

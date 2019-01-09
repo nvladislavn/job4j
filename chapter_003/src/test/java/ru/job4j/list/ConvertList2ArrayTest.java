@@ -34,7 +34,7 @@ public class ConvertList2ArrayTest {
     }
 
     /**
-     * tests convert
+     * tests  convert
      */
     @Test
     public void shouldBe123456() {
