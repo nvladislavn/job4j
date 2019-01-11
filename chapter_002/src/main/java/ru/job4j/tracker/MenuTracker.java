@@ -1,5 +1,8 @@
 package ru.job4j.tracker;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * MenuTracker.
  *
@@ -17,7 +20,8 @@ public class MenuTracker {
     private static final String FIND_BY_NAME = "5";
     private Input input;
     private Tracker tracker;
-    UserAction[] actions = new UserAction[6];
+    List<UserAction> actions = new ArrayList<>();
+//    UserAction[] actions = new UserAction[6];
 
     public MenuTracker(Input input, Tracker tracker) {
         this.input = input;
@@ -28,16 +32,22 @@ public class MenuTracker {
      * This method fills an actions array.
      */
     public void fillActions() {
-        this.actions[0] = this.new AddItem(ADD, "AddItem");
-        this.actions[1] = new MenuTracker.ShowAll(SHOW_ALL, "ShowAll");
-        this.actions[2] = this.new EditItem(EDIT, "EditItem");
-        this.actions[3] = this.new DeleteItem(DELETE, "DeleteItem");
-        this.actions[4] = this.new FindById(FIND_BY_ID, "FindById");
-        this.actions[5] = new FindByName(FIND_BY_NAME, "FindByName");
+        this.actions.add(this.new AddItem(ADD, "AddItem"));
+        this.actions.add(new MenuTracker.ShowAll(SHOW_ALL, "ShowAll"));
+        this.actions.add(this.new EditItem(EDIT, "EditItem"));
+        this.actions.add(this.new DeleteItem(DELETE, "DeleteItem"));
+        this.actions.add(this.new FindById(FIND_BY_ID, "FindById"));
+        this.actions.add(new FindByName(FIND_BY_NAME, "FindByName"));
+// this.actions[0] = this.new AddItem(ADD, "AddItem");
+//        this.actions[1] = new MenuTracker.ShowAll(SHOW_ALL, "ShowAll");
+//        this.actions[2] = this.new EditItem(EDIT, "EditItem");
+//        this.actions[3] = this.new DeleteItem(DELETE, "DeleteItem");
+//        this.actions[4] = this.new FindById(FIND_BY_ID, "FindById");
+//        this.actions[5] = new FindByName(FIND_BY_NAME, "FindByName");
     }
 
     public int getActionLength() {
-        return this.actions.length;
+        return this.actions.size();
     }
 
     /**
@@ -46,7 +56,7 @@ public class MenuTracker {
      * @param key - the number of the menu item.
      */
     public void select(int key) {
-        this.actions[key].execute(input, tracker);
+        this.actions.get(key).execute(input, tracker);
     }
 
     /**
@@ -91,12 +101,12 @@ public class MenuTracker {
 
         @Override
         public void execute(Input input, Tracker tracker) {
-            Item[] array = tracker.findAll();
-            if (array.length == 0) {
+            List<Item> list = tracker.findAll();
+            if (list.isEmpty()) {
                 System.out.println("No application has been created yet." + System.lineSeparator());
             } else {
                 System.out.println("---------------List of all applications---------------");
-                for (Item item : array) {
+                for (Item item : list) {
                     System.out.println(item.toString());
                 }
                 System.out.println();
@@ -186,12 +196,12 @@ class FindByName extends BaseAction {
     public void execute(Input input, Tracker tracker) {
         System.out.println("---------------Search application by name---------------");
         String name = input.ask("Please enter the name of the application you want to found:");
-        Item[] array = tracker.findByName(name);
-        if (array.length == 0) {
+        List<Item> list = tracker.findByName(name);
+        if (list.isEmpty()) {
             System.out.println("No applications with the given name were found!");
         } else {
             System.out.println("The applications were found: ");
-            for (Item item : array) {
+            for (Item item : list) {
                 System.out.println(item.toString());
             }
             System.out.println();

@@ -2,6 +2,9 @@ package ru.job4j.tracker;
 
 import org.junit.Test;
 
+import java.util.Arrays;
+import java.util.List;
+
 import static org.hamcrest.collection.IsArrayContainingInAnyOrder.arrayContainingInAnyOrder;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.*;
@@ -28,7 +31,7 @@ public class TrackerTest {
         Tracker tracker = new Tracker();
         Item item = new Item("test1", "testDescription", 123L);
         tracker.add(item);
-        assertThat(tracker.findAll()[0], is(item));
+        assertThat(tracker.findAll().get(0), is(item));
     }
 
     /**
@@ -55,9 +58,9 @@ public class TrackerTest {
         String indexSecond = secondItem.getId();
         replacement.setId(indexSecond);
         tracker.replace(indexSecond, replacement);
-        Item[] actuallyArray = tracker.findAll();
-        Item[] expectedArray = {firstItem, replacement, thirdItem, fourthItem};
-        assertThat(actuallyArray, arrayContainingInAnyOrder(expectedArray)); 
+        List<Item> actually = tracker.findAll();
+        List<Item> expected = Arrays.asList(firstItem, replacement, thirdItem, fourthItem);
+        assertThat(actually, is(expected));
     }
 
     /**
@@ -67,9 +70,9 @@ public class TrackerTest {
     public void whenDeleteThisItemThenReturnWithoutThatItem() {
         Tracker tracker = createTracker();
         tracker.delete(secondItem.getId());
-        Item[] actuallyArray = tracker.findAll();
-        Item[] expectedArray = {firstItem, thirdItem, fourthItem};
-        assertThat(actuallyArray, arrayContainingInAnyOrder(expectedArray));
+        List<Item> actually = tracker.findAll();
+        List<Item>  expected = Arrays.asList(firstItem, thirdItem, fourthItem);
+        assertThat(actually, is(expected));
     }
 
     /**
@@ -79,9 +82,9 @@ public class TrackerTest {
     public void shouldBeReturnWithoutNull() {
         Tracker tracker = createTracker();
         tracker.add(null);
-        Item[] actuallyArray = tracker.findAll();
-        Item[] expectedArray = {firstItem, secondItem, thirdItem, fourthItem};
-        assertThat(actuallyArray, arrayContainingInAnyOrder(expectedArray));
+        List<Item> actually = tracker.findAll();
+        List<Item> expected = Arrays.asList(firstItem, secondItem, thirdItem, fourthItem);
+        assertThat(actually, is(expected));
     }
 
     /**
@@ -91,9 +94,9 @@ public class TrackerTest {
     public void whenNameIsEqualThenReturn() {
         Tracker tracker = createTracker();
         fourthItem.setName("test2");
-        Item[] actuallyArray = tracker.findByName("test2");
-        Item[] expectedArray = {secondItem, fourthItem};
-        assertThat(actuallyArray, arrayContainingInAnyOrder(expectedArray));
+        List<Item> actually = tracker.findByName("test2");
+        List<Item> expected = Arrays.asList(secondItem, fourthItem);
+        assertThat(actually, is(expected));
     }
 
     /**
