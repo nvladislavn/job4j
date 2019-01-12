@@ -20,9 +20,6 @@ public class SortUser {
      * @return - the sorted TreeSet by user age.
      */
     public Set<User> sort(List<User> list) {
-        if (list.isEmpty()) {
-            throw new IllegalArgumentException("Users list is empty.");
-        }
         return new TreeSet<>(list);
     }
 }
