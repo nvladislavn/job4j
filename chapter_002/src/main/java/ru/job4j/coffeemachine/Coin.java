@@ -1,4 +1,4 @@
-package ru.job4j.coffeeMachine;
+package ru.job4j.coffeemachine;
 
 public enum Coin {
     COIN_10(10), COIN_5(5), COIN_2(2), COIN_1(1);

@@ -1,4 +1,4 @@
-package ru.job4j.coffeeMachine;
+package ru.job4j.coffeemachine;
 
 import org.junit.Test;
 
@@ -20,5 +20,4 @@ public class LogicTest {
         Logic logic = new Logic();
         assertThat(logic.getChange(41, 3), is(new int[]{10, 10, 10, 5, 2, 1}));
     }
-
 }
