@@ -6,6 +6,7 @@ import org.junit.Test;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+import java.util.List;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.*;
@@ -59,12 +60,12 @@ public class StartUIDisplaysTest {
      */
     @Test
     public void shouldReturnArrayNonNullItems() {
-        Item[] items = tracker.findAll();
+        List<Item> items = tracker.findAll();
         String expected = menu
                 + "---------------List of all applications---------------" + System.lineSeparator()
-                + "Item with name: Test name1, id: " + items[0].getId() + ", description: Test description1" + System.lineSeparator()
-                + "Item with name: Test name2, id: " + items[1].getId() + ", description: Test description2" + System.lineSeparator()
-                + "Item with name: Test name3, id: " + items[2].getId() + ", description: Test description3" + System.lineSeparator()
+                + "Item with name: Test name1, id: " + items.get(0).getId() + ", description: Test description1" + System.lineSeparator()
+                + "Item with name: Test name2, id: " + items.get(1).getId() + ", description: Test description2" + System.lineSeparator()
+                + "Item with name: Test name3, id: " + items.get(2).getId() + ", description: Test description3" + System.lineSeparator()
                 + System.lineSeparator()
                 + menu
                 + endRow;
@@ -77,7 +78,7 @@ public class StartUIDisplaysTest {
      */
     @Test
     public void whenNamesAreEqualThenReturn() {
-        Item item = tracker.findByName("Test name2")[0];
+        Item item = tracker.findByName("Test name2").get(0);
         String expected = menu
                 + "---------------Search application by name---------------" + System.lineSeparator()
                 + "The applications were found: " + System.lineSeparator()
@@ -94,7 +95,7 @@ public class StartUIDisplaysTest {
      */
     @Test
     public void whenIdIsEqualThenReturn() {
-        String id = tracker.findAll()[1].getId();
+        String id = tracker.findAll().get(1).getId();
         String expected = menu
                 + "---------------Search application by id---------------" + System.lineSeparator()
                 + "Was found the application: Item with name: Test name2, id: "

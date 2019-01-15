@@ -3,6 +3,8 @@ package ru.job4j.tracker.singleton;
 import ru.job4j.tracker.Item;
 import ru.job4j.tracker.Tracker;
 
+import java.util.List;
+
 /**
  * LazyTracker
  *
@@ -65,7 +67,7 @@ public class LazyTracker {
      *
      * @return the array non-null objects.
      */
-    public Item[] findAll() {
+    public List<Item> findAll() {
         return tracker.findAll();
     }
 
@@ -75,7 +77,7 @@ public class LazyTracker {
      * @param key - the given name.
      * @return the array of items with the given name.
      */
-    public Item[] findByName(String key) {
+    public List<Item> findByName(String key) {
         return tracker.findByName(key);
     }
 

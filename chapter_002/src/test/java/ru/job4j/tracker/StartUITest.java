@@ -1,8 +1,10 @@
 package ru.job4j.tracker;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import java.util.Arrays;
+import java.util.List;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.*;
@@ -16,19 +18,28 @@ import static org.junit.Assert.*;
  */
 public class StartUITest {
 
+    private Tracker tracker;
+
+    @Before
+    public void createTracker() {
+        tracker = new Tracker();
+        tracker.add(new Item("Test name1", "Test description1"));
+        tracker.add(new Item("Test name2", "Test description2"));
+        tracker.add(new Item("Test name3", "Test description3"));
+    }
+
     /**
      * Tests add.
      */
     @Test
     public void whenAddItemThenTrackerHasNewItem() {
-        Tracker tracker = new Tracker();
         String name = "Test name";
         String desc = "Test description";
-        runStartUI(tracker, new String[]{"0", name, desc, "6", "y"});
+        runStartUI(new String[]{"0", name, desc, "6", "y"});
         Item item = new Item(name, desc);
-        item.setId(tracker.findAll()[0].getId());
-        Item[] expected = {item};
-        Item[] actual = tracker.findAll();
+        item.setId(this.tracker.findAll().get(0).getId());
+        List<Item> expected = Arrays.asList(item);
+        List<Item> actual = this.tracker.findAll();
         assertThat(actual, is(expected));
     }
 
@@ -37,15 +48,14 @@ public class StartUITest {
      */
     @Test
     public void whenReplaceItemInArrayThenGetArrayWithNewItem() {
-        Tracker tracker = createTracker();
-        Item[] items = tracker.findAll();
+        List<Item> items = this.tracker.findAll();
         Item item2 = new Item("NEW name", "NEW description");
-        item2.setId(tracker.findByName("Test name2")[0].getId());
-        Item[] expected = {items[0], item2, items[2]};
-        runStartUI(tracker, new String[]{"2", tracker.findAll()[1].getId(),
+        item2.setId(this.tracker.findByName("Test name2").get(0).getId());
+        List<Item> expected = Arrays.asList(items.get(0), item2, items.get(2));
+        runStartUI(new String[]{"2", this.tracker.findAll().get(1).getId(),
                                         "NEW name", "NEW description",
                                         "6", "y"});
-        Item[] actual = tracker.findAll();
+        List<Item> actual = this.tracker.findAll();
         assertThat(actual, is(expected));
     }
 
@@ -54,25 +64,10 @@ public class StartUITest {
      */
     @Test
     public void whenDeleteTheItemWhenReturnNull() {
-        Tracker tracker = createTracker();
-        String id = tracker.findAll()[1].getId();
-        runStartUI(tracker, new String[]{"3", id, "6", "y"});
-        Item actual = tracker.findById(id);
+        String id = this.tracker.findAll().get(1).getId();
+        runStartUI(new String[]{"3", id, "6", "y"});
+        Item actual = this.tracker.findById(id);
         assertThat(actual, is((Item) null));
-    }
-
-    /**
-     * Tests deleteItem v.2.
-     */
-    @Test
-    public void whenDeleteTheItemWhenReturnArrayWithoutItem() {
-        Tracker tracker = createTracker();
-        Item[] items = tracker.findAll();
-        Item[] expected = Arrays.copyOf(items, items.length - 1);
-        String id = items[2].getId();
-        runStartUI(tracker, new String[]{"3", id, "6", "y"});
-        Item[] actual = tracker.findAll();
-        assertThat(actual, is(expected));
     }
 
     /**
@@ -80,19 +75,8 @@ public class StartUITest {
      *
      * @param commands - sequence of commands.
      */
-    private void runStartUI(Tracker tracker, String[] commands) {
+    private void runStartUI(String[] commands) {
         StubInput stubInput = new StubInput(commands);
         new StartUI(stubInput, tracker).init();
-    }
-
-    /**
-     * createTracker - service method to create an instance Tracker.
-     */
-    private Tracker createTracker() {
-        Tracker tracker = new Tracker();
-        tracker.add(new Item("Test name1", "Test description1"));
-        tracker.add(new Item("Test name2", "Test description2"));
-        tracker.add(new Item("Test name3", "Test description3"));
-        return tracker;
     }
 }
