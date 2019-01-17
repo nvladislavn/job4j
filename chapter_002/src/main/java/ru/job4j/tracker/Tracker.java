@@ -15,7 +15,6 @@ import java.util.Random;
 public class Tracker {
 
     private static final Random RAND = new Random();
-    private int position = 0;
     private final int arrayLength = 100;
     private List<Item> items = new ArrayList<>(arrayLength);
 
@@ -29,7 +28,6 @@ public class Tracker {
         if (item != null) {
             item.setId(this.generateId());
             this.items.add(item);
-            position++;
         }
         return item;
     }
@@ -70,7 +68,6 @@ public class Tracker {
         int delIndex = findIndexById(id);
         if (delIndex != -1) {
             this.items.remove(delIndex);
-            position--;
             result = true;
         }
         return result;
@@ -126,9 +123,9 @@ public class Tracker {
     private int findIndexById(String id) {
         int foundIndex = -1;
         if (!id.equals("")) {
-            for (int i = 0; i < position; i++) {
-                if (items.get(i).getId().equals(id)) {
-                    foundIndex = i;
+            for (Item item : this.items) {
+                if (item.getId().equals(id)) {
+                    foundIndex = this.items.indexOf(item);
                     break;
                 }
             }
