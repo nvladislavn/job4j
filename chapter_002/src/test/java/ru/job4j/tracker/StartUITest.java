@@ -35,12 +35,13 @@ public class StartUITest {
     public void whenAddItemThenTrackerHasNewItem() {
         String name = "Test name";
         String desc = "Test description";
-        runStartUI(new String[]{"0", name, desc, "6", "y"});
+        runStartUI(new String[]{"0", name, desc, "y"});
         Item item = new Item(name, desc);
         item.setId(this.tracker.findAll().get(0).getId());
-        List<Item> expected = Arrays.asList(item);
-        List<Item> actual = this.tracker.findAll();
-        assertThat(actual, is(expected));
+        this.tracker.add(item);
+        List<Item> itemList = this.tracker.findAll();
+        Item actual = itemList.get(itemList.size() - 1);
+        assertThat(actual, is(item));
     }
 
     /**
@@ -54,18 +55,18 @@ public class StartUITest {
         List<Item> expected = Arrays.asList(items.get(0), item2, items.get(2));
         runStartUI(new String[]{"2", this.tracker.findAll().get(1).getId(),
                                         "NEW name", "NEW description",
-                                        "6", "y"});
+                                        "y"});
         List<Item> actual = this.tracker.findAll();
         assertThat(actual, is(expected));
     }
 
     /**
-     * Tests deleteItem v.1.
+     * Tests deleteItem
      */
     @Test
     public void whenDeleteTheItemWhenReturnNull() {
         String id = this.tracker.findAll().get(1).getId();
-        runStartUI(new String[]{"3", id, "6", "y"});
+        runStartUI(new String[]{"3", id, "y"});
         Item actual = this.tracker.findById(id);
         assertThat(actual, is((Item) null));
     }

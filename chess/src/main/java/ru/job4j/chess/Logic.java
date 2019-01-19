@@ -23,16 +23,21 @@ public class Logic {
     public boolean move(Cell source, Cell dest) throws ImpossibleMoveException,
                                                     OccupiedWayException,
                                                     FigureNotFoundException {
-        int item = findByCell(source);
-        if (item == -1) {
-            throw new FigureNotFoundException();
+        try {
+            int item = findByCell(source);
+            if (item == -1) {
+                throw new FigureNotFoundException();
+            }
+            Figure figure = this.figures[item];
+            if (!isPossibleWay(figure.way(source, dest))) {
+                throw new OccupiedWayException("The way is occupied!");
+            }
+            this.figures[item] = figure.copy(dest);
+            return true;
+        } catch (RuntimeException re) {
+            System.out.println(re.getMessage());
+            return false;
         }
-        Figure figure = this.figures[item];
-        if (!isPossibleWay(figure.way(source, dest))) {
-            throw new OccupiedWayException("The way is occupied!");
-        }
-        this.figures[item] = figure.copy(dest);
-        return true;
     }
 
     private boolean isPossibleWay(Cell[] way) {

@@ -21,7 +21,6 @@ public class MenuTracker {
     private Input input;
     private Tracker tracker;
     List<UserAction> actions = new ArrayList<>();
-//    UserAction[] actions = new UserAction[6];
 
     public MenuTracker(Input input, Tracker tracker) {
         this.input = input;
@@ -38,12 +37,6 @@ public class MenuTracker {
         this.actions.add(this.new DeleteItem(DELETE, "DeleteItem"));
         this.actions.add(this.new FindById(FIND_BY_ID, "FindById"));
         this.actions.add(new FindByName(FIND_BY_NAME, "FindByName"));
-// this.actions[0] = this.new AddItem(ADD, "AddItem");
-//        this.actions[1] = new MenuTracker.ShowAll(SHOW_ALL, "ShowAll");
-//        this.actions[2] = this.new EditItem(EDIT, "EditItem");
-//        this.actions[3] = this.new DeleteItem(DELETE, "DeleteItem");
-//        this.actions[4] = this.new FindById(FIND_BY_ID, "FindById");
-//        this.actions[5] = new FindByName(FIND_BY_NAME, "FindByName");
     }
 
     public int getActionLength() {
