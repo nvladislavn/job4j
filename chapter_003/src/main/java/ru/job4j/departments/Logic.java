@@ -37,32 +37,21 @@ public class Logic {
     public String[] reversSort(String[] depArray) {
         Set<String> depSet = getId(depArray);
         String[] result = depSet.toArray(new String[depSet.size()]);
-        Comparator<String> decreaseComparator = new Comparator<String>() {
+        Arrays.sort(result, new Comparator<String>() {
             @Override
             public int compare(String s1, String s2) {
-                int length1 = s1.length();
-                int length2 = s2.length();
-                int minLength = Math.min(length1, length2);
-                for (int i = 0; i < minLength; i++) {
-                    char c1 = s1.charAt(i);
-                    char c2 = s2.charAt(i);
-                    if (c1 != c2) {
-                        return c2 - c1;
-                    }
-                }
-                if (length1 != length2) {
-                    return length1 - length2;
-                }
-                return 0;
+                int minLen = Math.min(s1.length(), s2.length());
+                int res = -s1.substring(0, minLen).compareTo(s2.substring(0, minLen));
+                return res != 0 ? res : Integer.compare(s1.length(), s2.length());
             }
-        };
-        Arrays.sort(result, decreaseComparator);
+        });
         return result;
     }
 
     /**
      * getId
      * Splits an id array.
+     *
      * @param array - an departments id array.
      * @return - the Set of departments id.
      */
