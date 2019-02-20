@@ -61,7 +61,7 @@ public class StartUIDisplaysTest {
                 + "Item with name: Test name1, id: " + items.get(0).getId() + ", description: Test description1" + System.lineSeparator()
                 + "Item with name: Test name2, id: " + items.get(1).getId() + ", description: Test description2" + System.lineSeparator()
                 + "Item with name: Test name3, id: " + items.get(2).getId() + ", description: Test description3" + System.lineSeparator()
-                + System.lineSeparator();
+                + System.lineSeparator() + System.lineSeparator();
         runStartUI(tracker, new String[]{"1", "y"});
         assertThat(baos.toString(), is(expected));
     }
@@ -76,7 +76,7 @@ public class StartUIDisplaysTest {
                 + "---------------Search application by name---------------" + System.lineSeparator()
                 + "The applications were found: " + System.lineSeparator()
                 + "Item with name: Test name2, id: " + item.getId() + ", description: Test description2" + System.lineSeparator()
-                + System.lineSeparator();
+                + System.lineSeparator() + System.lineSeparator();
         runStartUI(tracker, new String[]{"5", "Test name2", "y"});
         assertThat(baos.toString(), is(expected));
     }
