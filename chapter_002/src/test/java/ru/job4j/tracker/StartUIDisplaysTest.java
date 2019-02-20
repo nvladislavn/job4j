@@ -104,7 +104,7 @@ public class StartUIDisplaysTest {
      */
     private void runStartUI(Tracker tracker, String[] commands) {
         StubInput stubInput = new StubInput(commands);
-        new StartUI(stubInput, tracker).init();
+        new StartUI(stubInput, tracker, System.out::println).init();
     }
 
 }

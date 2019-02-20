@@ -2,6 +2,7 @@ package ru.job4j.tracker;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Consumer;
 
 /**
  * MenuTracker.
@@ -21,10 +22,13 @@ public class MenuTracker {
     private Input input;
     private Tracker tracker;
     List<UserAction> actions = new ArrayList<>();
+    private final Consumer<String> output;
 
-    public MenuTracker(Input input, Tracker tracker) {
+
+    public MenuTracker(Input input, Tracker tracker, Consumer<String> output) {
         this.input = input;
         this.tracker = tracker;
+        this.output = output;
     }
 
     /**
@@ -74,19 +78,19 @@ public class MenuTracker {
 
         @Override
         public void execute(Input input, Tracker tracker) {
-            System.out.println("---------------Adding item---------------");
+            MenuTracker.this.output.accept(("---------------Adding item---------------"));
             String name = input.ask("Please enter the name of your application:");
             String desc = input.ask("Please enter the description of your application:");
             Item item = new Item(name, desc);
             tracker.add(item);
-            System.out.println("Created a new application " + item.toString() + System.lineSeparator());
+            MenuTracker.this.output.accept("Created a new application " + item.toString() + System.lineSeparator());
         }
     }
 
     /**
      * ShowAll.
      */
-    public static class ShowAll extends BaseAction {
+    public class ShowAll extends BaseAction {
 
         public ShowAll(String key, String name) {
             super(key, name);
@@ -96,13 +100,13 @@ public class MenuTracker {
         public void execute(Input input, Tracker tracker) {
             List<Item> list = tracker.findAll();
             if (list.isEmpty()) {
-                System.out.println("No application has been created yet." + System.lineSeparator());
+                MenuTracker.this.output.accept("No application has been created yet." + System.lineSeparator());
             } else {
-                System.out.println("---------------List of all applications---------------");
+                MenuTracker.this.output.accept("---------------List of all applications---------------");
                 for (Item item : list) {
-                    System.out.println(item.toString());
+                    MenuTracker.this.output.accept(item.toString());
                 }
-                System.out.println();
+                MenuTracker.this.output.accept(System.lineSeparator());
             }
         }
     }
@@ -118,16 +122,16 @@ public class MenuTracker {
 
         @Override
         public void execute(Input input, Tracker tracker) {
-            System.out.println("---------------Editing item---------------");
+            MenuTracker.this.output.accept("---------------Editing item---------------");
             String id = input.ask("Please enter the id of the application you want to edit:");
             String newName = input.ask("Please enter a new name: ");
             String newDesc = input.ask("Please enter a new description: ");
             Item newItem = new Item(newName, newDesc);
             newItem.setId(id);
             if (tracker.replace(id, newItem)) {
-                System.out.println("Application editing is complete." + System.lineSeparator());
+                MenuTracker.this.output.accept("Application editing is complete." + System.lineSeparator());
             } else {
-                System.out.println("Application not found.");
+                MenuTracker.this.output.accept("Application not found.");
             }
         }
     }
@@ -143,12 +147,12 @@ public class MenuTracker {
 
         @Override
         public void execute(Input input, Tracker tracker) {
-            System.out.println("---------------Deleting item---------------");
+            MenuTracker.this.output.accept("---------------Deleting item---------------");
             String id = input.ask("Please enter the id of the application you want to delete:");
             if (tracker.delete(id)) {
-                System.out.println("Application deleted." + System.lineSeparator());
+                MenuTracker.this.output.accept("Application deleted." + System.lineSeparator());
             } else {
-                System.out.println("Application not found.");
+                MenuTracker.this.output.accept("Application not found.");
             }
         }
     }
@@ -164,41 +168,40 @@ public class MenuTracker {
 
         @Override
         public void execute(Input input, Tracker tracker) {
-            System.out.println("---------------Search application by id---------------");
+            MenuTracker.this.output.accept("---------------Search application by id---------------");
             String id = input.ask("Please enter the id of the application you want to found:");
             Item item = tracker.findById(id);
             if (item == null) {
-                System.out.println("An application with the given id was not found!");
+                MenuTracker.this.output.accept("An application with the given id was not found!");
             } else {
-                System.out.println("Was found the application: " + item.toString() + System.lineSeparator());
+                MenuTracker.this.output.accept("Was found the application: " + item.toString() + System.lineSeparator());
+            }
+        }
+    }
+
+    /**
+     * FindByName.
+     */
+    public class FindByName extends BaseAction {
+
+        public FindByName(String key, String name) {
+            super(key, name);
+        }
+
+        @Override
+        public void execute(Input input, Tracker tracker) {
+            MenuTracker.this.output.accept("---------------Search application by name---------------");
+            String name = input.ask("Please enter the name of the application you want to found:");
+            List<Item> list = tracker.findByName(name);
+            if (list.isEmpty()) {
+                MenuTracker.this.output.accept("No applications with the given name were found!");
+            } else {
+                MenuTracker.this.output.accept("The applications were found: ");
+                for (Item item : list) {
+                    MenuTracker.this.output.accept(item.toString());
+                }
+                MenuTracker.this.output.accept(System.lineSeparator());
             }
         }
     }
 }
-
-/**
- * FindByName.
- */
-class FindByName extends BaseAction {
-
-    public FindByName(String key, String name) {
-        super(key, name);
-    }
-
-    @Override
-    public void execute(Input input, Tracker tracker) {
-        System.out.println("---------------Search application by name---------------");
-        String name = input.ask("Please enter the name of the application you want to found:");
-        List<Item> list = tracker.findByName(name);
-        if (list.isEmpty()) {
-            System.out.println("No applications with the given name were found!");
-        } else {
-            System.out.println("The applications were found: ");
-            for (Item item : list) {
-                System.out.println(item.toString());
-            }
-            System.out.println();
-        }
-    }
-}
-

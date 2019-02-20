@@ -1,5 +1,7 @@
 package ru.job4j.tracker;
 
+import java.util.function.Consumer;
+
 /**
  * StartUI.
  *
@@ -8,9 +10,9 @@ package ru.job4j.tracker;
  * @since 11.11.2018
  */
 public class StartUI {
-
     private final Input input;
     private final Tracker tracker;
+    private final Consumer<String> output;
 
     /**
      * StartUI. Creating an instance of StartUI class.
@@ -18,26 +20,17 @@ public class StartUI {
      * @param input   - an instance of ConsoleInput class.
      * @param tracker - an instance of Tracker class.
      */
-    public StartUI(Input input, Tracker tracker) {
+    public StartUI(Input input, Tracker tracker, Consumer<String> output) {
         this.input = input;
         this.tracker = tracker;
-    }
-
-    public static void main(String[] args) {
-        StartUI startUI = new StartUI(
-                                    new ValidateInput(
-                                                    new ConsoleInput()
-                                                    ),
-                                    new Tracker()
-                                    );
-        startUI.init();
+        this.output = output;
     }
 
     /**
      * init.
      */
     public void init() {
-        MenuTracker menuTracker = new MenuTracker(this.input, this.tracker);
+        MenuTracker menuTracker = new MenuTracker(this.input, this.tracker, this.output);
         menuTracker.fillActions();
         int actionLength = menuTracker.getActionLength();
         int[] range = new int[actionLength];

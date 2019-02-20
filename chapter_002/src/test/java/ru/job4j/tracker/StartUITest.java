@@ -78,6 +78,6 @@ public class StartUITest {
      */
     private void runStartUI(String[] commands) {
         StubInput stubInput = new StubInput(commands);
-        new StartUI(stubInput, tracker).init();
+        new StartUI(stubInput, tracker, System.out::println).init();
     }
 }
