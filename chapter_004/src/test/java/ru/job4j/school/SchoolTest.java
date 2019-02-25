@@ -3,8 +3,7 @@ package ru.job4j.school;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.*;
@@ -25,12 +24,12 @@ public class SchoolTest {
 
     @Before
     public void createStudentsList() {
-       this.students = Arrays.asList(new Student(10),
-                                    new Student(100),
-                                    new Student(60),
-                                    new Student(30),
-                                    new Student(80),
-                                    new Student(65)
+       this.students = Arrays.asList(new Student("Petrov", "John", 10),
+                                    new Student("Ivanov", "Ivan", 100),
+                                    new Student("Petrova", "Darya", 60),
+                                    new Student("Sidorova", "Ekaterina", 30),
+                                    new Student("Stepanov", "Evgeniy", 80),
+                                    new Student("Alexandrov", "Michail", 65)
                                     );
        this.school = new School();
     }
@@ -62,5 +61,15 @@ public class SchoolTest {
     public void shouldBe2StudentsInClassC() {
         List<Student> expected = Arrays.asList(this.students.get(0), this.students.get(3));
         assertThat(this.school.collect(this.students, student -> student.getScore() <= FIFTY), is(expected));
+    }
+
+    @Test
+    public void shouldListReturnTheMap() {
+        Map<String, Student> map = new TreeMap<>();
+        for (int i = 0; i < this.students.size(); i++) {
+            Student student = this.students.get(i);
+            map.put(student.getSurname(), student);
+        }
+        assertThat(this.school.getStudents(this.students), is(map));
     }
 }
