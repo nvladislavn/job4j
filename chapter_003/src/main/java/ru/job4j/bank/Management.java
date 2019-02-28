@@ -1,6 +1,7 @@
 package ru.job4j.bank;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * Management
@@ -75,7 +76,12 @@ public class Management {
         List<Account> accounts = new ArrayList<>();
         User user = findUser(passport);
         if (user != User.EMPTY_USER) {
-            accounts.addAll(customersData.get(user));
+          accounts = this.customersData.entrySet()
+                    .stream()
+                    .filter(entry -> entry.getKey().equals(user))
+                    .map(e -> e.getValue())
+                    .collect(Collectors.toList())
+                    .get(0);
         }
         return accounts;
     }
@@ -124,13 +130,11 @@ public class Management {
      * @return - found account
      */
     private Account findAccount(List<Account> accounts, String requisites) {
-        Account findAccount = Account.EMPTY_ACCOUNT;
-        for (Account account : accounts) {
-            if (account.getRequisites().equals(requisites)) {
-                findAccount = account;
-            }
-        }
-        return findAccount;
+            return accounts
+                    .stream()
+                    .filter(account -> account.getRequisites().equals(requisites))
+                    .findFirst()
+                    .orElse(Account.EMPTY_ACCOUNT);
     }
 
     /**
@@ -140,13 +144,11 @@ public class Management {
      * @return - found user
      */
     private User findUser(String passport) {
-        User findUser = User.EMPTY_USER;
-        for (Map.Entry<User, List<Account>> entry : customersData.entrySet()) {
-            User user = entry.getKey();
-            if (user.getPassport().equals(passport)) {
-                findUser = user;
-            }
-        }
-        return findUser;
+            return this.customersData.entrySet()
+                    .stream()
+                    .filter(entry -> entry.getKey().getPassport().equals(passport))
+                    .map(e -> e.getKey())
+                    .findFirst()
+                    .orElse(User.EMPTY_USER);
     }
 }
