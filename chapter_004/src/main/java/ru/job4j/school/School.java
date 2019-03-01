@@ -41,11 +41,11 @@ public class School {
      * @return - the list of student who have a score above the specified bound.
      */
     public List<Student> levelOf(List<Student> students, int bound) {
-       return students
-               .stream()
-               .flatMap(Stream::ofNullable)
-               .sorted(Comparator.comparingInt(Student::getScore))
-               .dropWhile(s -> s.getScore() <= bound)
-               .collect(Collectors.toList());
+        return students
+                .stream()
+                .flatMap(Stream::ofNullable)
+                .sorted(Comparator.comparingInt(Student::getScore))
+                .dropWhile(s -> s.getScore() <= bound)
+                .collect(Collectors.toList());
     }
 }

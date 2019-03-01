@@ -24,14 +24,14 @@ public class SchoolTest {
 
     @Before
     public void createStudentsList() {
-       this.students = Arrays.asList(new Student("John", 10),
-                                    new Student("Ivan", 100),
-                                    new Student("Darya", 60),
-                                    new Student("Ekaterina", 30),
-                                    new Student( "Eugene", 80),
-                                    new Student("Michail", 65)
-                                    );
-       this.school = new School();
+        this.students = Arrays.asList(new Student("John", 10),
+                new Student("Ivan", 100),
+                new Student("Darya", 60),
+                new Student("Ekaterina", 30),
+                new Student("Eugene", 80),
+                new Student("Michail", 65)
+        );
+        this.school = new School();
     }
 
     /**
@@ -51,7 +51,7 @@ public class SchoolTest {
     public void shouldBe2StudentsInClassB() {
         List<Student> expected = Arrays.asList(this.students.get(2), this.students.get(5));
         assertThat(this.school.collect(this.students, student -> student.getScore() > FIFTY && student.getScore() <= SEVENTY),
-                    is(expected));
+                is(expected));
     }
 
     /**
@@ -79,8 +79,8 @@ public class SchoolTest {
     @Test
     public void shouldBeMichailEugeneIvan() {
         assertThat(this.school.levelOf(this.students, 60),
-                                        is(List.of(this.students.get(5),
-                                                    this.students.get(4),
-                                                    this.students.get(1))));
+                is(List.of(this.students.get(5),
+                        this.students.get(4),
+                        this.students.get(1))));
     }
-}
+  }
