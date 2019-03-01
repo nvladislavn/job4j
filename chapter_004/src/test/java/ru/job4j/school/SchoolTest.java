@@ -24,12 +24,12 @@ public class SchoolTest {
 
     @Before
     public void createStudentsList() {
-       this.students = Arrays.asList(new Student("Petrov", "John", 10),
-                                    new Student("Ivanov", "Ivan", 100),
-                                    new Student("Petrova", "Darya", 60),
-                                    new Student("Sidorova", "Ekaterina", 30),
-                                    new Student("Stepanov", "Evgeniy", 80),
-                                    new Student("Alexandrov", "Michail", 65)
+       this.students = Arrays.asList(new Student("John", 10),
+                                    new Student("Ivan", 100),
+                                    new Student("Darya", 60),
+                                    new Student("Ekaterina", 30),
+                                    new Student( "Eugene", 80),
+                                    new Student("Michail", 65)
                                     );
        this.school = new School();
     }
@@ -68,8 +68,19 @@ public class SchoolTest {
         Map<String, Student> map = new TreeMap<>();
         for (int i = 0; i < this.students.size(); i++) {
             Student student = this.students.get(i);
-            map.put(student.getSurname(), student);
+            map.put(student.getName(), student);
         }
         assertThat(this.school.getStudents(this.students), is(map));
+    }
+
+    /**
+     * tests levelOf
+     */
+    @Test
+    public void shouldBeMichailEugeneIvan() {
+        assertThat(this.school.levelOf(this.students, 60),
+                                        is(List.of(this.students.get(5),
+                                                    this.students.get(4),
+                                                    this.students.get(1))));
     }
 }

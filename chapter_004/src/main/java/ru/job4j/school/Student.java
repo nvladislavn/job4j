@@ -7,13 +7,11 @@ package ru.job4j.school;
  * @since 25.02.2019
  */
 public class Student {
-    private String surname;
     private String name;
     private int score;
 
 
-    public Student(String surname, String name, int score) {
-        this.surname = surname;
+    public Student(String name, int score) {
         this.name = name;
         this.score = score;
     }
@@ -33,10 +31,6 @@ public class Student {
      */
     public void setScore(int score) {
         this.score = score;
-    }
-
-    public String getSurname() {
-        return this.surname;
     }
 
     public String getName() {
