@@ -29,7 +29,7 @@ public class ConvertList2ArrayTest {
      */
     @Test
     public void when7ElementsThen9() {
-        int[][] actual = convert.toArray(Arrays.asList(1, 2, 3, 4, 5, 6, 7), 3);
+        int[][] actual = convert.toArray(List.of(1, 2, 3, 4, 5, 6, 7), 3);
         int[][] expected = {{1, 2, 3}, {4, 5, 6}, {7, 0, 0}};
         assertThat(actual, is(expected));
     }
@@ -39,10 +39,7 @@ public class ConvertList2ArrayTest {
      */
     @Test
     public void shouldBe123456() {
-        List<int[]> list = new ArrayList<>();
-        list.add(new int[]{1, 2});
-        list.add(new int[]{3, 4, 5});
-        list.add(new int[]{6});
+        List<int[]> list = List.of(new int[]{1, 2}, new int[]{3, 4, 5}, new int[]{6});
         assertThat(convert.convert(list), is(new ArrayList(Arrays.asList(1, 2, 3, 4, 5, 6))));
     }
 

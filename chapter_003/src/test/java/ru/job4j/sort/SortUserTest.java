@@ -30,12 +30,9 @@ public class SortUserTest {
      */
     @Test
    public void whenJohnKateMichelleThenKateMichelleJohn() {
-        List<User> userList = new ArrayList<>(Arrays.asList(
-                                                        new User("John", 45),
-                                                            new User("Kate", 25),
-                                                            new User("Michelle", 35)
-                                                            )
-                                                );
+        List<User> userList = List.of(new User("John", 45),
+                                        new User("Kate", 25),
+                                        new User("Michelle", 35));
         for (User user : sort.sort(userList)) {
             actual.append(user.getName());
         }
@@ -47,12 +44,9 @@ public class SortUserTest {
      */
     @Test
     public void whenJohnMichelleGarryThenJohnGarryMichelle() {
-        List<User> userList = new ArrayList<>(Arrays.asList(
-                                                        new User("John", 45),
-                                                        new User("Michelle", 25),
-                                                        new User("Garry", 35)
-                                                            )
-                                                );
+        List<User> userList = List.of(new User("John", 45),
+                                        new User("Michelle", 25),
+                                        new User("Garry", 35));
         for (User user : this.sort.sortNameLength(userList)) {
             actual.append(user.getName());
         }
@@ -64,13 +58,10 @@ public class SortUserTest {
      */
     @Test
     public void whenJohnKateJohnThenJohnJohnKate() {
-        List<User> userList = new ArrayList<>(Arrays.asList(
-                                                        new User("John", 45),
-                                                        new User("Kate", 25),
-                                                        new User("John", 35),
-                                                        new User("Kate", 20)
-                                                        )
-                                                );
+        List<User> userList = List.of(new User("John", 45),
+                                        new User("Kate", 25),
+                                        new User("John", 35),
+                                        new User("Kate", 20));
         for (User user : this.sort.sortByFields(userList)) {
             actual.append(user.getName()).append(user.getAge());
         }

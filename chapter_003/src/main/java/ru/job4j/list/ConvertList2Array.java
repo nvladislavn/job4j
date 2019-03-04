@@ -2,7 +2,11 @@
 package ru.job4j.list;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 /**
  * ConvertList2Array
@@ -14,8 +18,9 @@ public class ConvertList2Array {
 
     /**
      * toArray
-     *
+     * <p>
      * convert List to Array
+     *
      * @param list - list
      * @param rows - row count
      * @return - array
@@ -35,8 +40,9 @@ public class ConvertList2Array {
 
     /**
      * convert
-     *
+     * <p>
      * convert List of arrays to integer List
+     *
      * @param list - List of arrays
      * @return - integer List
      */

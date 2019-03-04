@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * Logic
@@ -36,16 +37,15 @@ public class Logic {
      */
     public String[] reversSort(String[] depArray) {
         Set<String> depSet = getId(depArray);
-        String[] result = depSet.toArray(new String[depSet.size()]);
-        Arrays.sort(result, new Comparator<String>() {
-            @Override
-            public int compare(String s1, String s2) {
-                int minLen = Math.min(s1.length(), s2.length());
-                int res = -s1.substring(0, minLen).compareTo(s2.substring(0, minLen));
-                return res != 0 ? res : Integer.compare(s1.length(), s2.length());
-            }
-        });
-        return result;
+        Comparator<String> stringComparator = (s1, s2) -> {
+            int minLen = Math.min(s1.length(), s2.length());
+            int res = -s1.substring(0, minLen).compareTo(s2.substring(0, minLen));
+            return res != 0 ? res : Integer.compare(s1.length(), s2.length());
+        };
+       return depSet
+                .stream()
+                .sorted(stringComparator)
+                .toArray(String[]::new);
     }
 
     /**

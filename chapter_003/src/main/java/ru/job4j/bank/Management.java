@@ -76,7 +76,7 @@ public class Management {
         List<Account> accounts = new ArrayList<>();
         User user = findUser(passport);
         if (user != User.EMPTY_USER) {
-          accounts = this.customersData.entrySet()
+            accounts = this.customersData.entrySet()
                     .stream()
                     .filter(entry -> entry.getKey().equals(user))
                     .map(e -> e.getValue())
@@ -130,11 +130,11 @@ public class Management {
      * @return - found account
      */
     private Account findAccount(List<Account> accounts, String requisites) {
-            return accounts
-                    .stream()
-                    .filter(account -> account.getRequisites().equals(requisites))
-                    .findFirst()
-                    .orElse(Account.EMPTY_ACCOUNT);
+        return accounts
+                .stream()
+                .filter(account -> account.getRequisites().equals(requisites))
+                .findFirst()
+                .orElse(Account.EMPTY_ACCOUNT);
     }
 
     /**
@@ -144,11 +144,11 @@ public class Management {
      * @return - found user
      */
     private User findUser(String passport) {
-            return this.customersData.entrySet()
-                    .stream()
-                    .filter(entry -> entry.getKey().getPassport().equals(passport))
-                    .map(e -> e.getKey())
-                    .findFirst()
-                    .orElse(User.EMPTY_USER);
+        return this.customersData.entrySet()
+                .stream()
+                .filter(entry -> entry.getKey().getPassport().equals(passport))
+                .map(e -> e.getKey())
+                .findFirst()
+                .orElse(User.EMPTY_USER);
     }
 }
