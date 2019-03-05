@@ -21,7 +21,7 @@ public class MyPriorityQueue {
      * @param task
      */
     public void put(Task task) {
-        for (int i = 0; i < this.tasks.size(); i++) {
+        for (var i = 0; i < this.tasks.size(); i++) {
                 if (task.getPriority() <= this.tasks.get(i).getPriority()) {
                     this.tasks.add(i, task);
                     return;

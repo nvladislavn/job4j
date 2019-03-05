@@ -26,7 +26,7 @@ public class PhoneDictionaryTest {
         phoneDictionary.add(new Person("Adam", "Johnson", "123456789", "SAN FRANCISCO CA 94528"));
         phoneDictionary.add(new Person("Adrian", "Jones", "123456780", "SAN FRANCISCO CA 14528"));
         phoneDictionary.add(new Person("Bob", "Smith", "723456780", "LA 549235"));
-        List<Person> persons = phoneDictionary.find("945");
+        var persons = phoneDictionary.find("945");
         assertThat(persons.iterator().next().getSurname(), is("Johnson"));
     }
 }
