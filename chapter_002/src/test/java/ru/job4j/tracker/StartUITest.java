@@ -57,7 +57,7 @@ public class StartUITest {
                                         "NEW name", "NEW description",
                                         "y"});
         List<Item> actual = this.tracker.findAll();
-        assertThat(actual, is(expected));
+        assertThat(actual,  is(expected));
     }
 
     /**
