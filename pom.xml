@@ -20,6 +20,7 @@
         <module>chapter_003</module>
         <module>chapter_004</module>
         <module>tictactoe</module>
+        <module>junior_001</module>
     </modules>
 
     <dependencies>
