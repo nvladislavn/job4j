@@ -21,21 +21,12 @@ public class Converter {
         return new Iterator<>() {
 
             private Iterator<Integer> currentIterator;
-            private List<Iterator<Integer>> iterators = new ArrayList<>();
-            private Iterator<Iterator<Integer>> iterator;
-
-            {
-                while (it.hasNext()) {
-                    iterators.add(it.next());
-                }
-                iterator = iterators.iterator();
-            }
 
             private void setCurrentIterator() {
-                if (currentIterator == null && iterator.hasNext()) {
-                    currentIterator = iterator.next();
-                } else if (!currentIterator.hasNext() && iterator.hasNext()) {
-                    currentIterator = iterator.next();
+                if (currentIterator == null && it.hasNext()) {
+                    currentIterator = it.next();
+                } else if (!currentIterator.hasNext() && it.hasNext()) {
+                    currentIterator = it.next();
                 }
             }
 
