@@ -1,6 +1,7 @@
 package ru.job4j.services;
 
 import java.util.*;
+import java.util.stream.Stream;
 
 /**
  * Converter
@@ -25,8 +26,15 @@ public class Converter {
             private void setCurrentIterator() {
                 if (currentIterator == null && it.hasNext()) {
                     currentIterator = it.next();
-                } else if (!currentIterator.hasNext() && it.hasNext()) {
-                    currentIterator = it.next();
+                }
+                boolean ind = true;
+                while (ind) {
+                    if (!currentIterator.hasNext() && it.hasNext()) {
+                        currentIterator = it.next();
+                    } else {
+                        ind = false;
+                    }
+
                 }
             }
 
@@ -38,7 +46,6 @@ public class Converter {
 
             @Override
             public Integer next() {
-                setCurrentIterator();
                 if (!hasNext()) {
                     throw new NoSuchElementException("No return elements");
                 }
