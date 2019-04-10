@@ -15,7 +15,7 @@ public class SimpleArrayTest {
 
     @Before
     public void createSimpleArray() {
-        sa = new SimpleArray<>(5);
+        sa = new SimpleArray<>(10);
         sa.add(1);
         sa.add(2);
         sa.add(3);

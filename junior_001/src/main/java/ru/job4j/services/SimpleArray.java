@@ -12,7 +12,7 @@ import java.util.NoSuchElementException;
 public class SimpleArray<T> implements Iterable<T> {
 
     private Object[] array;
-    private int currentIndex;
+    private int boundIndex;
 
     public SimpleArray(int length) {
         array = new Object[length];
@@ -24,10 +24,10 @@ public class SimpleArray<T> implements Iterable<T> {
      * @param model - the item to add.
      */
     public void add(T model) {
-        if (array.length == currentIndex) {
+        if (array.length == boundIndex) {
             throw new IndexOutOfBoundsException("Array size exceeded.");
         }
-        array[currentIndex++] = model;
+        array[boundIndex++] = model;
     }
 
     /**
@@ -37,9 +37,7 @@ public class SimpleArray<T> implements Iterable<T> {
      * @param model - replacement item.
      */
     public void set(int index, T model) {
-        if (index >= array.length) {
-            throw new IndexOutOfBoundsException("Index out of array bounds.");
-        }
+        checkIndex(index);
         array[index] = model;
     }
 
@@ -49,8 +47,10 @@ public class SimpleArray<T> implements Iterable<T> {
      * @param index - index of the deleted item.
      */
     public void remove(int index) {
+        checkIndex(index);
         System.arraycopy(array, index + 1, array, index, array.length - (index + 1));
         array[array.length - 1] = null;
+        boundIndex--;
     }
 
     /**
@@ -60,10 +60,17 @@ public class SimpleArray<T> implements Iterable<T> {
      * @return - array item.
      */
     public T get(int index) {
-        if (index >= array.length) {
-            throw new IndexOutOfBoundsException("Index out of array bounds.");
-        }
+        checkIndex(index);
         return (T) array[index];
+    }
+
+    private void checkIndex(int index) {
+        if (index >= boundIndex) {
+            throw new NoSuchElementException(
+                    String.format("Index indicates a non-existent item: the maximum index - %d, specified index - %d",
+                            boundIndex - 1,
+                            index));
+        }
     }
 
     @Override
@@ -74,7 +81,7 @@ public class SimpleArray<T> implements Iterable<T> {
 
             @Override
             public boolean hasNext() {
-                return array.length > indx;
+                return boundIndex > indx;
             }
 
             @Override
