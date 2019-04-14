@@ -8,7 +8,7 @@ package ru.job4j.services.store;
  */
 public class Role extends Base {
 
-    protected Role(String id) {
+    public Role(String id) {
         super(id);
     }
 }
