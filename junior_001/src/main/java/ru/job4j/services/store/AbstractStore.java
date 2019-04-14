@@ -2,6 +2,8 @@ package ru.job4j.services.store;
 
 import ru.job4j.services.SimpleArray;
 
+import java.util.stream.Stream;
+
 /**
  * AbstractStore
  *
@@ -29,13 +31,13 @@ public abstract class AbstractStore<T extends Base> implements Store<T> {
     /**
      * replace
      *
-     * @param id    - an index of array cell.
+     * @param id    - the field of child of Base class.
      * @param model - the new replacement item.
      * @return - true if the replacement succeeded.
      */
     @Override
     public boolean replace(String id, T model) {
-        int index = Integer.parseInt(id);
+        int index = getIndex(id);
         sa.set(index, model);
         return sa.get(index) == model;
     }
@@ -43,12 +45,12 @@ public abstract class AbstractStore<T extends Base> implements Store<T> {
     /**
      * delete
      *
-     * @param id - an index of array cell.
+     * @param id - the field of child of Base class.
      * @return - true if the removal succeeded.
      */
     @Override
     public boolean delete(String id) {
-        int index = Integer.parseInt(id);
+        int index = getIndex(id);
         var model = sa.get(index);
         sa.remove(index);
         return sa.get(index) != model;
@@ -57,12 +59,30 @@ public abstract class AbstractStore<T extends Base> implements Store<T> {
     /**
      * findById
      *
-     * @param id - an index of array cell.
+     * @param id - the field of child of Base class.
      * @return - found item.
      */
     @Override
     public T findById(String id) {
-        return sa.get(Integer.parseInt(id));
+        return sa.get(getIndex(id));
     }
 
+    /**
+     * getIndex
+     *
+     * @param id - the field of child of Base class
+     * @return - the index of array cell.
+     */
+    private int getIndex(String id) {
+        int ind = -1;
+        int count = 0;
+        for (T t : sa) {
+            if (t.getId().equals(id)) {
+                ind = count;
+                break;
+            }
+            count++;
+        }
+        return ind;
+    }
 }
