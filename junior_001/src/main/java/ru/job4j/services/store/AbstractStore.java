@@ -2,6 +2,7 @@ package ru.job4j.services.store;
 
 import ru.job4j.services.SimpleArray;
 
+import java.util.Optional;
 import java.util.stream.Stream;
 
 /**
@@ -38,6 +39,9 @@ public abstract class AbstractStore<T extends Base> implements Store<T> {
     @Override
     public boolean replace(String id, T model) {
         int index = getIndex(id);
+        if (index == -1) {
+            return false;
+        }
         sa.set(index, model);
         return sa.get(index) == model;
     }
@@ -51,6 +55,9 @@ public abstract class AbstractStore<T extends Base> implements Store<T> {
     @Override
     public boolean delete(String id) {
         int index = getIndex(id);
+        if (index == -1) {
+            return false;
+        }
         var model = sa.get(index);
         sa.remove(index);
         return sa.get(index) != model;
@@ -64,6 +71,10 @@ public abstract class AbstractStore<T extends Base> implements Store<T> {
      */
     @Override
     public T findById(String id) {
+        int index = getIndex(id);
+        if (index == -1) {
+            return null;
+        }
         return sa.get(getIndex(id));
     }
 

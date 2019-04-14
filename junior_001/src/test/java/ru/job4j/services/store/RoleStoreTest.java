@@ -30,9 +30,9 @@ public class RoleStoreTest {
      */
     @Test
     public void shouldReturnId1Id2Id3() {
-        assertThat(rs.findById("0").getId(), is("id1"));
-        assertThat(rs.findById("1").getId(), is("id2"));
-        assertThat(rs.findById("2").getId(), is("id3"));
+        assertThat(rs.findById("id1").getId(), is("id1"));
+        assertThat(rs.findById("id2").getId(), is("id2"));
+        assertThat(rs.findById("id3").getId(), is("id3"));
     }
 
     /**
@@ -41,9 +41,9 @@ public class RoleStoreTest {
      */
     @Test
     public void shouldReturnFirstId2ThenId4() {
-        assertThat(rs.findById("1").getId(), is("id2"));
-        rs.replace("1", new Role("id4"));
-        assertThat(rs.findById("1").getId(), is("id4"));
+        assertThat(rs.findById("id2").getId(), is("id2"));
+        rs.replace("id2", new Role("id4"));
+        assertThat(rs.findById("id4").getId(), is("id4"));
     }
 
     /**
@@ -52,7 +52,7 @@ public class RoleStoreTest {
      */
     @Test
     public void shouldReturnId3() {
-        rs.delete("1");
-        assertThat(rs.findById("1").getId(), is("id3"));
+        rs.delete("id2");
+        assertThat(rs.findById("id3").getId(), is("id3"));
     }
 }
