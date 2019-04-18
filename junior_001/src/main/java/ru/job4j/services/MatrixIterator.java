@@ -3,6 +3,7 @@ package ru.job4j.services;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
+
 /**
  * MatrixIterator
  *
@@ -47,5 +48,4 @@ public class MatrixIterator implements Iterator<Integer> {
         }
     }
 }
-
 
