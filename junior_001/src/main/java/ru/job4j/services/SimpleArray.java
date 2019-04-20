@@ -65,9 +65,9 @@ public class SimpleArray<T> implements Iterable<T> {
     }
 
     private void checkIndex(int index) {
-        if (index >= boundIndex) {
+        if (index >= boundIndex || index < 0) {
             throw new NoSuchElementException(
-                    String.format("Index indicates a non-existent item: the maximum index - %d, specified index - %d",
+                    String.format("Index indicates a non-existent item: minimum index - 0, maximum index - %d, specified index - %d",
                             boundIndex - 1,
                             index));
         }
