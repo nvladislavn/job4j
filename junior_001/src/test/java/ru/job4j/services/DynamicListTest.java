@@ -1,6 +1,5 @@
 package ru.job4j.services;
 
-import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ConcurrentModificationException;
@@ -18,36 +17,41 @@ import static org.junit.Assert.*;
  */
 public class DynamicListTest {
 
-    private DynamicList dl;
-    private Iterator it;
-
-    @Before
-    public void createDynamicList() {
-        dl = new DynamicList(3);
+    @Test
+    public void shouldReturn3() {
+        var dl = new DynamicList<>(3);
         dl.add(1);
         dl.add(2);
         dl.add(3);
-        it = dl.iterator();
-    }
-
-    @Test
-    public void shouldReturn3() {
         assertThat(dl.get(2), is(3));
     }
 
     @Test(expected = NoSuchElementException.class)
     public void shouldReturnException() {
+        var dl = new DynamicList<>(3);
+        dl.add(1);
+        dl.add(2);
+        dl.add(3);
         assertThat(dl.get(3), is(4));
     }
 
     @Test
     public void shouldIncreasesArrayAndReturns4() {
+        var dl = new DynamicList<>(3);
+        dl.add(1);
+        dl.add(2);
+        dl.add(3);
         dl.add(4);
         assertThat(dl.get(3), is(4));
     }
 
     @Test
     public void shouldReturnFalse() {
+        var dl = new DynamicList<>(3);
+        dl.add(1);
+        dl.add(2);
+        dl.add(3);
+        Iterator it = dl.iterator();
         it.next();
         it.next();
         it.next();
@@ -56,6 +60,11 @@ public class DynamicListTest {
 
     @Test
     public void shouldReturnTrueAnd2() {
+        var dl = new DynamicList<>(3);
+        dl.add(1);
+        dl.add(2);
+        dl.add(3);
+        Iterator it = dl.iterator();
         assertThat(it.hasNext(), is(true));
         it.next();
         assertThat(it.next(), is(2));
@@ -63,6 +72,11 @@ public class DynamicListTest {
 
     @Test(expected = ConcurrentModificationException.class)
     public void shouldReturnConcurrentModificationException() {
+        var dl = new DynamicList<>(3);
+        dl.add(1);
+        dl.add(2);
+        dl.add(3);
+        Iterator it = dl.iterator();
         dl.add(4);
         it.hasNext();
     }
