@@ -36,6 +36,10 @@ public class SimpleStack<T> implements Iterable<T> {
         return date;
     }
 
+    public int getSize() {
+        return nodeList.getSize();
+    }
+
     @Override
     public Iterator<T> iterator() {
 
