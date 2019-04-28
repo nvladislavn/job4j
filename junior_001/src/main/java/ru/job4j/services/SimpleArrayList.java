@@ -32,6 +32,9 @@ public class SimpleArrayList<E> implements Iterable<E> {
      * @return - deleted item.
      */
     public E delete() {
+        if (size == 0) {
+            throw new NoSuchElementException();
+        }
         E temp = first.date;
         first = first.next;
         size--;
