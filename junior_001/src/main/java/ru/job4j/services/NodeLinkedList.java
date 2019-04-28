@@ -36,10 +36,39 @@ public class NodeLinkedList<E> implements Iterable<E> {
      * @return - value of the specified item.
      */
     public E get(int index) {
-        if (index < 0 || index >= size) {
-            throw new NoSuchElementException();
-        }
+        checkIndex(index);
         return getNode(index).value;
+    }
+
+    /**
+     * poll
+     *
+     * @return - a value of first item.
+     */
+    public E poll() {
+        int firstIndex = 0;
+        checkIndex(firstIndex);
+        E result = first.value;
+        remove(firstIndex);
+        return result;
+    }
+
+
+    /**
+     * remove
+     *
+     * @param index - an index of remove item.
+     */
+    public void remove(int index) {
+        checkIndex(index);
+        if (index == 0) {
+            first = first.next;
+        } else {
+            Node<E> prevNode = getNode(index - 1);
+            prevNode.next = prevNode.next.next;
+        }
+        size--;
+        modCount++;
     }
 
     /**
@@ -54,6 +83,17 @@ public class NodeLinkedList<E> implements Iterable<E> {
             res = res.next;
         }
         return res;
+    }
+
+    /**
+     * checkIndex
+     *
+     * @param index - a checked index.
+     */
+    private void checkIndex(int index) {
+        if (index < 0 || index >= size) {
+            throw new NoSuchElementException();
+        }
     }
 
     /**
