@@ -1,6 +1,7 @@
 package ru.job4j.services.map;
 
 import java.util.Calendar;
+import java.util.Objects;
 
 /**
  * User
@@ -10,11 +11,9 @@ import java.util.Calendar;
  */
 public class User {
 
-
     private String name;
     private int children;
     private Calendar birthday;
-
 
     public User(String name, int children, Calendar birthday) {
         this.name = name;
@@ -34,13 +33,28 @@ public class User {
         return birthday;
     }
 
+//    @Override
+//    public int hashCode() {
+//        final int prime = 31;
+//        int result = 0;
+//        result = prime * result + (name == null ? 0 : name.hashCode());
+//        result = prime * result + children;
+//        result = prime * result + (birthday == null ? 0 : birthday.hashCode());
+//        return result;
+//    }
+
+
     @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = 0;
-        result = prime * result + (name == null ? 0 : name.hashCode());
-        result = prime * result + children;
-        result = prime * result + (birthday == null ? 0 : birthday.hashCode());
-        return result;
+    public boolean equals(Object obj) {
+        if (obj == this) {
+            return true;
+        }
+        if (obj == null || obj.getClass() != this.getClass()) {
+            return false;
+        }
+        User other = (User) obj;
+        return (Objects.equals(other.getName(), name))
+                && (other.children == children)
+                && (Objects.equals(other.getBirthday(), birthday));
     }
 }
