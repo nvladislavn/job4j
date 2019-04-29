@@ -27,8 +27,8 @@ public class UserMap {
         var um = new UserMap();
         var user1 = new User("John", 2, new GregorianCalendar(1980, Calendar.APRIL, 25));
         var user2 = new User("John", 2, new GregorianCalendar(1980, Calendar.APRIL, 25));
-        um.put(user1,null);
-        um.put(user2,null);
+        um.put(user1, null);
+        um.put(user2, null);
         System.out.println(String.format("hashCode user1 = %d", user1.hashCode()));
         System.out.println(String.format("hashCode user2 = %d", user2.hashCode()));
         um.printMap();
