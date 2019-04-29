@@ -19,7 +19,7 @@ public class DynamicListTest {
 
     @Test
     public void shouldReturn3() {
-        var dl = new DynamicList<>(3);
+        DynamicList dl = new DynamicList(3);
         dl.add(1);
         dl.add(2);
         dl.add(3);
@@ -28,7 +28,7 @@ public class DynamicListTest {
 
     @Test(expected = NoSuchElementException.class)
     public void shouldReturnException() {
-        var dl = new DynamicList<>(3);
+        DynamicList dl = new DynamicList(3);
         dl.add(1);
         dl.add(2);
         dl.add(3);
@@ -37,7 +37,7 @@ public class DynamicListTest {
 
     @Test
     public void shouldIncreasesArrayAndReturns4() {
-        var dl = new DynamicList<>(3);
+        DynamicList dl = new DynamicList(3);
         dl.add(1);
         dl.add(2);
         dl.add(3);
@@ -47,7 +47,7 @@ public class DynamicListTest {
 
     @Test
     public void shouldReturnFalse() {
-        var dl = new DynamicList<>(3);
+        DynamicList dl = new DynamicList(3);
         dl.add(1);
         dl.add(2);
         dl.add(3);
@@ -60,7 +60,7 @@ public class DynamicListTest {
 
     @Test
     public void shouldReturnTrueAnd2() {
-        var dl = new DynamicList<>(3);
+        DynamicList dl = new DynamicList(3);
         dl.add(1);
         dl.add(2);
         dl.add(3);
@@ -70,9 +70,22 @@ public class DynamicListTest {
         assertThat(it.next(), is(2));
     }
 
+    @Test
+    public void shouldReturnNull() {
+        DynamicList dl = new DynamicList(3);
+        dl.add(1);
+        dl.add(null);
+        dl.add(3);
+        Iterator it = dl.iterator();
+        assertThat(it.hasNext(), is(true));
+        it.next();
+        assertNull(it.next());
+        assertThat(it.next(), is(3));
+    }
+
     @Test(expected = ConcurrentModificationException.class)
     public void shouldReturnConcurrentModificationException() {
-        var dl = new DynamicList<>(3);
+        DynamicList dl = new DynamicList(3);
         dl.add(1);
         dl.add(2);
         dl.add(3);
