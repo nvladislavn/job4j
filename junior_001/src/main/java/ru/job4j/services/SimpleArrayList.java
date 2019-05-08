@@ -59,7 +59,7 @@ public class SimpleArrayList<E> implements Iterable<E> {
     }
 
     /**
-     * getSize
+     * size
      *
      * @return - size of the SimpleArrayList.
      */

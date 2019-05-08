@@ -97,11 +97,11 @@ public class NodeLinkedList<E> implements Iterable<E> {
     }
 
     /**
-     * getSize
+     * size
      *
      * @return - size of the nodeLinkedList.
      */
-    public int getSize() {
+    public int size() {
         return size;
     }
 

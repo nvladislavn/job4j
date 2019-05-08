@@ -33,7 +33,7 @@ public class SimpleArrayListTest {
     }
 
     /**
-     * tests getSize
+     * tests size
      */
     @Test
     public void whenAddThreeElementsThenUseGetSizeResultThree() {
