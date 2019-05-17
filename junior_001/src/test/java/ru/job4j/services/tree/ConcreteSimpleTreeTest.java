@@ -95,4 +95,25 @@ public class ConcreteSimpleTreeTest {
         tree.add(1, 3);
         tree.add(4, 3);
     }
+
+    @Test
+    public void whenIsBinaryThenReturnTrue() {
+        SimpleTree<Integer> tree = new ConcreteSimpleTree<>(1);
+        tree.add(1, 2);
+        tree.add(1, 3);
+        tree.add(2, 4);
+        tree.add(4, 5);
+        tree.add(4, 6);
+        assertTrue(tree.isBinary());
+    }
+
+    @Test
+    public void whenisNonBinaryThenReturnFalse() {
+        SimpleTree<Integer> tree = new ConcreteSimpleTree<>(1);
+        tree.add(1, 2);
+        tree.add(1, 3);
+        tree.add(1, 4);
+        tree.add(4, 5);
+        assertFalse(tree.isBinary());
+    }
 }

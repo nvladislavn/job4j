@@ -67,6 +67,30 @@ public class ConcreteSimpleTree<E extends Comparable<E>> implements SimpleTree<E
     }
 
     /**
+     * isBinary
+     *
+     * @return - true if this tree is  binary.
+     */
+    @Override
+    public boolean isBinary() {
+        boolean res = true;
+        Queue<Node<E>> nodeQueue = new LinkedList<>();
+        nodeQueue.offer(root);
+        while (!nodeQueue.isEmpty()) {
+            Node<E> currentNode = nodeQueue.poll();
+            List<Node<E>> children = currentNode.leaves();
+            if (children.size() > 2) {
+                res = false;
+                break;
+            }
+            for (Node<E> child : children) {
+                nodeQueue.offer(child);
+            }
+        }
+        return res;
+    }
+
+    /**
      * size
      *
      * @return - size of the tree.
