@@ -21,7 +21,7 @@ public class Config {
     }
 
     /**
-     * load
+     * loadAnswers
      * <p>
      * fills the values from app.properties
      */

@@ -12,10 +12,10 @@ import java.util.stream.Collectors;
 public class ScriptLoader {
 
     /**
-     * load
+     * loadAnswers
      *
      * @param ds - the script map.
-     * @param scriptId - the script to load.
+     * @param scriptId - the script to loadAnswers.
      * @return - script list.
      */
     public List<Integer> load(Map<Integer, List<Integer>> ds, Integer scriptId) {
