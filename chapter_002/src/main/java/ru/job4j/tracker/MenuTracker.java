@@ -20,12 +20,12 @@ public class MenuTracker {
     private static final String FIND_BY_ID = "4";
     private static final String FIND_BY_NAME = "5";
     private Input input;
-    private Tracker tracker;
+    private ITracker tracker;
     List<UserAction> actions = new ArrayList<>();
     private final Consumer<String> output;
 
 
-    public MenuTracker(Input input, Tracker tracker, Consumer<String> output) {
+    public MenuTracker(Input input, ITracker tracker, Consumer<String> output) {
         this.input = input;
         this.tracker = tracker;
         this.output = output;
@@ -77,7 +77,7 @@ public class MenuTracker {
         }
 
         @Override
-        public void execute(Input input, Tracker tracker) {
+        public void execute(Input input, ITracker tracker) {
             MenuTracker.this.output.accept(("---------------Adding item---------------"));
             String name = input.ask("Please enter the name of your application:");
             String desc = input.ask("Please enter the description of your application:");
@@ -97,7 +97,7 @@ public class MenuTracker {
         }
 
         @Override
-        public void execute(Input input, Tracker tracker) {
+        public void execute(Input input, ITracker tracker) {
             List<Item> list = tracker.findAll();
             if (list.isEmpty()) {
                 MenuTracker.this.output.accept("No application has been created yet." + System.lineSeparator());
@@ -121,7 +121,7 @@ public class MenuTracker {
         }
 
         @Override
-        public void execute(Input input, Tracker tracker) {
+        public void execute(Input input, ITracker tracker) {
             MenuTracker.this.output.accept("---------------Editing item---------------");
             String id = input.ask("Please enter the id of the application you want to edit:");
             String newName = input.ask("Please enter a new name: ");
@@ -146,7 +146,7 @@ public class MenuTracker {
         }
 
         @Override
-        public void execute(Input input, Tracker tracker) {
+        public void execute(Input input, ITracker tracker) {
             MenuTracker.this.output.accept("---------------Deleting item---------------");
             String id = input.ask("Please enter the id of the application you want to delete:");
             if (tracker.delete(id)) {
@@ -167,7 +167,7 @@ public class MenuTracker {
         }
 
         @Override
-        public void execute(Input input, Tracker tracker) {
+        public void execute(Input input, ITracker tracker) {
             MenuTracker.this.output.accept("---------------Search application by id---------------");
             String id = input.ask("Please enter the id of the application you want to found:");
             Item item = tracker.findById(id);
@@ -189,7 +189,7 @@ public class MenuTracker {
         }
 
         @Override
-        public void execute(Input input, Tracker tracker) {
+        public void execute(Input input, ITracker tracker) {
             MenuTracker.this.output.accept("---------------Search application by name---------------");
             String name = input.ask("Please enter the name of the application you want to found:");
             List<Item> list = tracker.findByName(name);

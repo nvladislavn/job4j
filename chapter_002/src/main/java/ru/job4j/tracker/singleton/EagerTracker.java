@@ -1,5 +1,6 @@
 package ru.job4j.tracker.singleton;
 
+import ru.job4j.tracker.ITracker;
 import ru.job4j.tracker.Item;
 import ru.job4j.tracker.Tracker;
 
@@ -14,7 +15,7 @@ import java.util.List;
  */
 public class EagerTracker {
 
-    private Tracker tracker = new Tracker();
+    private ITracker tracker = new Tracker();
     private static final EagerTracker EAGER_TRACKER = new EagerTracker();
 
     private EagerTracker() {

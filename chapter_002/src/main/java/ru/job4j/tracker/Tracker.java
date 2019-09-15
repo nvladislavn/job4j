@@ -1,9 +1,7 @@
 package ru.job4j.tracker;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Random;
 
 /**
  * Tracker
@@ -12,9 +10,8 @@ import java.util.Random;
  * @version $Id$
  * @since 08.11.2018
  */
-public class Tracker {
+public class Tracker implements ITracker {
 
-    private static final Random RAND = new Random();
     private final int arrayLength = 100;
     private List<Item> items = new ArrayList<>(arrayLength);
 
@@ -26,26 +23,17 @@ public class Tracker {
      */
     public Item add(Item item) {
         if (item != null) {
-            item.setId(this.generateId());
+            item.setId(generateId());
             this.items.add(item);
         }
         return item;
     }
 
     /**
-     * generateId.
-     *
-     * @return - id.
-     */
-    private String generateId() {
-        return String.valueOf(System.currentTimeMillis() + RAND.nextInt());
-    }
-
-    /**
      * replace. This method changes item with the specified id.
      *
-     * @param id
-     * @param item
+     * @param id   - the specified item id.
+     * @param item - the item to replace.
      */
     public boolean replace(String id, Item item) {
         boolean result = false;
@@ -61,7 +49,7 @@ public class Tracker {
     /**
      * delete. This method deletes the item with the specified id.
      *
-     * @param id
+     * @param id - - the item id for the item to be deleted.
      */
     public boolean delete(String id) {
         boolean result = false;
@@ -83,7 +71,7 @@ public class Tracker {
     }
 
     /**
-     * findByName. This method returns the array of items with the specified name.
+     * findByName. This method returns the List of items with the specified name.
      *
      * @param key - the given name.
      * @return the array of items with the given name.

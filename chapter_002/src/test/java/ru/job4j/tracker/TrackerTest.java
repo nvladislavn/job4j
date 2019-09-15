@@ -28,7 +28,7 @@ public class TrackerTest {
      */
     @Test
     public void whenAddNewItemThenTrackerHasSameItem() {
-        Tracker tracker = new Tracker();
+        ITracker tracker = new Tracker();
         Item item = new Item("test1", "testDescription", 123L);
         tracker.add(item);
         assertThat(tracker.findAll().get(0), is(item));
@@ -39,7 +39,7 @@ public class TrackerTest {
      */
     @Test
     public void whenReplaceNameThenReturnNewName() {
-        Tracker tracker = new Tracker();
+        ITracker tracker = new Tracker();
         Item previous = new Item("test1", "testDescription", 123L);
         tracker.add(previous);
         Item next = new Item("test2", "testDescription2", 1234L);
@@ -53,7 +53,7 @@ public class TrackerTest {
      */
     @Test
     public void whenReplaceItemThenReturnNewItemName() {
-        Tracker tracker = createTracker();
+        ITracker tracker = createTracker();
         Item replacement = new Item("replacement", "replacementDescription", 12345L);
         String indexSecond = secondItem.getId();
         replacement.setId(indexSecond);
@@ -68,7 +68,7 @@ public class TrackerTest {
      */
     @Test
     public void whenDeleteThisItemThenReturnWithoutThatItem() {
-        Tracker tracker = createTracker();
+        ITracker tracker = createTracker();
         tracker.delete(secondItem.getId());
         List<Item> actually = tracker.findAll();
         List<Item>  expected = Arrays.asList(firstItem, thirdItem, fourthItem);
@@ -80,7 +80,7 @@ public class TrackerTest {
      */
     @Test
     public void shouldBeReturnWithoutNull() {
-        Tracker tracker = createTracker();
+        ITracker tracker = createTracker();
         tracker.add(null);
         List<Item> actually = tracker.findAll();
         List<Item> expected = Arrays.asList(firstItem, secondItem, thirdItem, fourthItem);
@@ -92,7 +92,7 @@ public class TrackerTest {
      */
     @Test
     public void whenNameIsEqualThenReturn() {
-        Tracker tracker = createTracker();
+        ITracker tracker = createTracker();
         fourthItem.setName("test2");
         List<Item> actually = tracker.findByName("test2");
         List<Item> expected = Arrays.asList(secondItem, fourthItem);
@@ -104,7 +104,7 @@ public class TrackerTest {
      */
     @Test
     public void whenIdIs123321TestThenSecondItem() {
-        Tracker tracker = createTracker();
+        ITracker tracker = createTracker();
         secondItem.setId("123321Test");
         Item actuallyItem = tracker.findById("123321Test");
         assertThat(actuallyItem, is(secondItem));
@@ -115,8 +115,8 @@ public class TrackerTest {
      *
      * @return the instance of Tracker.
      */
-    private Tracker createTracker() {
-        Tracker tracker = new Tracker();
+    private ITracker createTracker() {
+        ITracker tracker = new Tracker();
         firstItem = new Item("test1", "testDescription1", 111L);
         tracker.add(firstItem);
         secondItem = new Item("test2", "testDescription2", 222L);

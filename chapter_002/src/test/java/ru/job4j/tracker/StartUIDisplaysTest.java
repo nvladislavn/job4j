@@ -26,7 +26,7 @@ public class StartUIDisplaysTest {
                         + "3 : DeleteItem" + System.lineSeparator()
                         + "4 : FindById" + System.lineSeparator()
                         + "5 : FindByName" + System.lineSeparator();
-    private Tracker tracker;
+    private ITracker tracker;
     private PrintStream stdout;
     private ByteArrayOutputStream baos;
 
@@ -102,7 +102,7 @@ public class StartUIDisplaysTest {
      *
      * @param commands - sequence of commands.
      */
-    private void runStartUI(Tracker tracker, String[] commands) {
+    private void runStartUI(ITracker tracker, String[] commands) {
         StubInput stubInput = new StubInput(commands);
         new StartUI(stubInput, tracker, System.out::println).init();
     }

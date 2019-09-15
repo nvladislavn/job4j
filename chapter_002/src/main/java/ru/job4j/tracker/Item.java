@@ -50,6 +50,10 @@ public class Item {
         this.desc = desc;
     }
 
+    public long getCreated() {
+        return created;
+    }
+
     @Override
     public String toString() {
         return ("Item with name: " + name

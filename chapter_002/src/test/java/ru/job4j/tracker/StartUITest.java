@@ -18,7 +18,7 @@ import static org.junit.Assert.*;
  */
 public class StartUITest {
 
-    private Tracker tracker;
+    private ITracker tracker;
 
     @Before
     public void createTracker() {

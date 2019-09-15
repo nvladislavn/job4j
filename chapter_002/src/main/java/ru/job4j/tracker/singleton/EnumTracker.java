@@ -1,5 +1,6 @@
 package ru.job4j.tracker.singleton;
 
+import ru.job4j.tracker.ITracker;
 import ru.job4j.tracker.Item;
 import ru.job4j.tracker.Tracker;
 
@@ -16,7 +17,7 @@ public enum EnumTracker {
 
     INSTANCE;
 
-    private Tracker tracker = new Tracker();
+    private ITracker tracker = new Tracker();
 
     /**
      * The method add.
