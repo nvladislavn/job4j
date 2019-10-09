@@ -16,10 +16,10 @@ public class LogForTestTest {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(baos));
         LogForTest.main(new String[]{""});
-        String except = "Test: error" + System.lineSeparator();
+        String except = String.format("Test: error%s", System.lineSeparator());
         LogForTest.main(new String[0]);
         String actual = baos.toString();
-        assertThat(actual.substring(actual.length() - 13), is(except));
+        assertThat(actual.substring(actual.length() - except.length()), is(except));
         System.setOut(ps);
     }
 }

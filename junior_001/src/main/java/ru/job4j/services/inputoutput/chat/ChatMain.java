@@ -37,7 +37,12 @@ public class ChatMain {
         System.out.println("Please type something:");
         Scanner scanner = new Scanner(System.in);
         String str;
-        while (scanner.hasNextLine() && !(str = scanner.nextLine()).equals(FINISH)) {
+//        while (scanner.hasNextLine() && !(str = scanner.nextLine()).equals(FINISH)) {
+        while (scanner.hasNextLine()) {
+            str = scanner.nextLine();
+            if (str.equalsIgnoreCase(FINISH)) {
+                break;
+            }
             log.writeToLog(str);
             str = str.toLowerCase();
             Map<String, Consumer<ChatMain>> dispather = actions.getDispather();
@@ -79,9 +84,9 @@ public class ChatMain {
         commands.put(STOP, cm -> cm.isNeedAnAnswer = false);
         commands.put(CONTINUE, cm -> cm.isNeedAnAnswer = true);
         ChatMain chat = new ChatMain(new Log(argums.getLogPath()),
-                                        conf.getHiByeAnswers(),
-                                        conf.getRandomAnswers(),
-                                        commands);
+                conf.getHiByeAnswers(),
+                conf.getRandomAnswers(),
+                commands);
         chat.chat();
         System.out.println();
     }

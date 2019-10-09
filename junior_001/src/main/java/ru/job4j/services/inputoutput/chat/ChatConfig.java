@@ -32,16 +32,14 @@ public class ChatConfig {
     private void loadAnswers() {
         String str = null;
         try (BufferedReader in = new BufferedReader(new FileReader(answersPath))) {
-            while((str = in.readLine()) != null) {
+            while ((str = in.readLine()) != null) {
                 if (str.contains("=")) {
                     String[] kv = str.split("=");
                     hiByeAnswers.put(kv[0].trim(), kv[1].trim());
-                } else if(!str.isEmpty()) {
+                } else if (!str.isEmpty()) {
                     randomAnswers.add(str);
                 }
             }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
