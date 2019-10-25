@@ -1,5 +1,6 @@
 package ru.job4j.trackersql;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import ru.job4j.tracker.Item;
@@ -27,23 +28,41 @@ public class TrackerSQLTest {
     private static final Item testItem = new Item("testItem", "testDesc", System.currentTimeMillis());
 
     @Before
-    public void setConnection() {
+    public void prepareTest() {
+        setConnection();
+        createTracker();
+        createTable();
+    }
+
+    @After
+    public void closeConnect() {
+        if (connection != null) {
+            try {
+                connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private void setConnection() {
         try (InputStream in = TrackerSQLTest.class.getClassLoader().getResourceAsStream("app.properties")) {
             Properties properties = new Properties();
             properties.load(in);
             Class.forName(properties.getProperty("driver-class-name"));
-            connection = DriverManager.getConnection(
-                    properties.getProperty("url"),
-                    properties.getProperty("username"),
-                    properties.getProperty("password")
+            connection = ConnectionRollback.create(
+                                        DriverManager.getConnection(
+                                                properties.getProperty("url"),
+                                                properties.getProperty("username"),
+                                                properties.getProperty("password")
+                                        )
             );
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    @Before
-    public void createTable() {
+    private void createTable() {
         fillItems();
         String createSQL = "DROP TABLE IF EXISTS "
                 + "    items,"
@@ -75,7 +94,7 @@ public class TrackerSQLTest {
         }
     }
 
-    public void fillItems() {
+    private void fillItems() {
         for (int i = 1; i < 4; i++) {
             Item item = new Item(String.format("Name%s", i),
                     String.format("Desc%s", i));
@@ -84,10 +103,8 @@ public class TrackerSQLTest {
         }
     }
 
-    @Before
-    public void initTracker() {
-        trackerSQL = new TrackerSQL();
-        trackerSQL.init();
+    private void createTracker() {
+        trackerSQL = new TrackerSQL(connection);
     }
 
     /**
