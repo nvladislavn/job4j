@@ -24,27 +24,6 @@ public class TrackerSQL implements ITracker, AutoCloseable {
         this.connection = connection;
     }
 
-//    /**
-//     * init
-//     *
-//     * @return - true if connection is has been given.
-//     */
-//    public boolean init() {
-//        try (InputStream in = TrackerSQL.class.getClassLoader().getResourceAsStream("app.properties")) {
-//            Properties config = new Properties();
-//            config.load(in);
-////            Class.forName(config.getProperty("driver-class-name"));
-////            this.connection = DriverManager.getConnection(
-////                    config.getProperty("url"),
-////                    config.getProperty("username"),
-////                    config.getProperty("password")
-////            );
-//        } catch (Exception e) {
-//            LOG.error(e.getMessage(), e);
-//        }
-//        return this.connection != null;
-//    }
-
     /**
      * The method add.
      *
@@ -186,7 +165,7 @@ public class TrackerSQL implements ITracker, AutoCloseable {
      *
      * @param res - result set from sql query.
      * @return - the item List from resultSet.
-     * @throws SQLException
+     * @throws - SQLException
      */
     private List<Item> getItemList(ResultSet res) throws SQLException {
         List<Item> items = new ArrayList<>();
