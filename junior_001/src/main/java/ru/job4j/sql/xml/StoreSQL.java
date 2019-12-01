@@ -68,7 +68,7 @@ public class StoreSQL implements AutoCloseable {
     /**
      * generate
      *
-     * @param size      - the number of generated items.
+     * @param size      - the number of generated ru.job4j.items.
      * @param tableName -the table name.
      */
     public void generate(int size, String tableName) throws SQLException {

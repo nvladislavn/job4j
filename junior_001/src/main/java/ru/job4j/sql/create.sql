@@ -36,7 +36,7 @@ CREATE TABLE states
     PRIMARY KEY (id)
 );
 
-CREATE TABLE items
+CREATE TABLE ru.job4j.items
 (
     id          SERIAL,
     name        VARCHAR(2000),
@@ -49,7 +49,7 @@ CREATE TABLE comments
 (
     id      SERIAL,
     name    VARCHAR(2000),
-    item_id INT REFERENCES items (id) NOT NULL,
+    item_id INT REFERENCES ru.job4j.items (id) NOT NULL,
     PRIMARY KEY (id)
 );
 
@@ -57,7 +57,7 @@ CREATE TABLE attachments
 (
     id      SERIAL,
     name    VARCHAR(2000),
-    item_id INT REFERENCES items (id) NOT NULL,
+    item_id INT REFERENCES ru.job4j.items (id) NOT NULL,
     PRIMARY KEY (id)
 );
 
@@ -102,7 +102,7 @@ VALUES ('Ivanov'),
        ('Petrov'),
        ('Sidorova');
 
-INSERT INTO items(name)
+INSERT INTO ru.job4j.items(name)
 VALUES ('Ivanov item'),
        ('Petrov item'),
        ('Sidorova item');

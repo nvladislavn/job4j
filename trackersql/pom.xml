@@ -48,12 +48,11 @@
                 <artifactId>liquibase-maven-plugin</artifactId>
                 <version>3.6.2</version>
                 <configuration>
-                    <changeLogFile>${basedir}/db/master.xml</changeLogFile>
-
-                    <url>${db.url}</url>
-                    <driver>${db.driver}</driver>
-                    <username>${db.username}</username>
-                    <password>${db.password}</password>
+                    <changeLogFile>${basedir}/ru.job4j.db/master.xml</changeLogFile>
+                    <url>${ru.job4j.db.url}</url>
+                    <driver>${ru.job4j.db.driver}</driver>
+                    <username>${ru.job4j.db.username}</username>
+                    <password>${ru.job4j.db.password}</password>
                 </configuration>
                 <executions>
                     <execution>

@@ -71,10 +71,10 @@ public class Tracker implements ITracker {
     }
 
     /**
-     * findByName. This method returns the List of items with the specified name.
+     * findByName. This method returns the List of ru.job4j.items with the specified name.
      *
      * @param key - the given name.
-     * @return the array of items with the given name.
+     * @return the array of ru.job4j.items with the given name.
      */
     public List<Item> findByName(String key) {
         List<Item> nameList = new ArrayList<>();

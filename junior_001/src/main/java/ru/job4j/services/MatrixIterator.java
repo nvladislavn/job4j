@@ -39,7 +39,7 @@ public class MatrixIterator implements Iterator<Integer> {
     @Override
     public Integer next() {
         if (!hasNext()) {
-            throw new NoSuchElementException("No items for return");
+            throw new NoSuchElementException("No ru.job4j.items for return");
         }
         if (secondIndex == array[firstIndex].length) {
             return array[++firstIndex][0];

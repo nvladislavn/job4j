@@ -92,7 +92,7 @@ public class TrackerSQL implements ITracker, AutoCloseable {
     public boolean delete(String id) {
         boolean result = false;
         if (connection != null && id != null) {
-            String sqlStatement = String.format("DELETE FROM items WHERE id = '%s';", id);
+            String sqlStatement = String.format("DELETE FROM ru.job4j.items WHERE id = '%s';", id);
             try (Statement statement = connection.createStatement()) {
                 statement.execute(sqlStatement);
                 result = true;
@@ -123,15 +123,15 @@ public class TrackerSQL implements ITracker, AutoCloseable {
 
     /**
      * findByName.
-     * This method returns the List of items with the specified name.
+     * This method returns the List of ru.job4j.items with the specified name.
      *
      * @param key - the given name.
-     * @return the array of items with the given name.
+     * @return the array of ru.job4j.items with the given name.
      */
     @Override
     public List<Item> findByName(String key) {
         List<Item> items = new ArrayList<>();
-        String query = String.format("SELECT * FROM items WHERE name = '%s';", key);
+        String query = String.format("SELECT * FROM ru.job4j.items WHERE name = '%s';", key);
         try (Statement statement = connection.createStatement()) {
             items = getItemList(statement.executeQuery(query));
         } catch (Exception e) {
@@ -150,7 +150,7 @@ public class TrackerSQL implements ITracker, AutoCloseable {
     @Override
     public Item findById(String id) {
         Item result = null;
-        String query = String.format("SELECT * FROM items WHERE id = '%s'", id);
+        String query = String.format("SELECT * FROM ru.job4j.items WHERE id = '%s'", id);
         try (Statement statement = connection.createStatement()) {
             result = getItemList(statement.executeQuery(query)).get(0);
         } catch (Exception e) {

@@ -1,4 +1,4 @@
-CREATE TABLE items
+CREATE TABLE ru.job4j.items
 (
     id VARCHAR(13) PRIMARY KEY,
     name VARCHAR(2000),
@@ -10,6 +10,6 @@ CREATE TABLE  comments
 (
     id SERIAL PRIMARY KEY,
     commentText TEXT,
-    item_id VARCHAR(13) REFERENCES items(id)
+    item_id VARCHAR(13) REFERENCES ru.job4j.items(id)
 );
 

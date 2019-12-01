@@ -24,25 +24,26 @@
         <module>tictactoe</module>
         <module>junior_001</module>
         <module>trackersql</module>
+        <module>parser</module>
     </modules>
 
     <profiles>
         <profile>
             <id>test</id>
             <properties>
-                <db.url>jdbc:postgresql://127.0.0.1:5432/tracker</db.url>
-                <db.username>postgres</db.username>
-                <db.password>111</db.password>
-                <db.driver>org.postgresql.Driver</db.driver>
+                <ru.job4j.db.url>jdbc:postgresql://127.0.0.1:5432/tracker</ru.job4j.db.url>
+                <ru.job4j.db.username>postgres</ru.job4j.db.username>
+                <ru.job4j.db.password>111</ru.job4j.db.password>
+                <ru.job4j.db.driver>org.postgresql.Driver</ru.job4j.db.driver>
             </properties>
         </profile>
         <profile>
             <id>production</id>
             <properties>
-                <db.url>jdbc:postgresql://127.0.0.1:5432/tracker</db.url>
-                <db.username>postgres</db.username>
-                <db.password>111</db.password>
-                <db.driver>org.postgresql.Driver</db.driver>
+                <ru.job4j.db.url>jdbc:postgresql://127.0.0.1:5432/tracker</ru.job4j.db.url>
+                <ru.job4j.db.username>postgres</ru.job4j.db.username>
+                <ru.job4j.db.password>111</ru.job4j.db.password>
+                <ru.job4j.db.driver>org.postgresql.Driver</ru.job4j.db.driver>
             </properties>
         </profile>
         <profile>
@@ -51,10 +52,10 @@
                 <activeByDefault>true</activeByDefault>
             </activation>
             <properties>
-                <db.url>jdbc:postgresql://localhost/tracker</db.url>
-                <db.username>postgres</db.username>
-                <db.password>111</db.password>
-                <db.driver>org.postgresql.Driver</db.driver>
+                <ru.job4j.db.url>jdbc:postgresql://localhost/tracker</ru.job4j.db.url>
+                <ru.job4j.db.username>postgres</ru.job4j.db.username>
+                <ru.job4j.db.password>111</ru.job4j.db.password>
+                <ru.job4j.db.driver>org.postgresql.Driver</ru.job4j.db.driver>
             </properties>
         </profile>
     </profiles>
@@ -132,6 +133,16 @@
             <artifactId>log4j-core</artifactId>
             <version>2.11.1</version>
         </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>1.7.5</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
+            <version>1.7.5</version>
+        </dependency>
         <!-- https://mvnrepository.com/artifact/javax.xml.bind/jaxb-api -->
         <dependency>
             <groupId>javax.xml.bind</groupId>
@@ -152,6 +163,18 @@
         <dependency>
             <groupId>org.glassfish.jaxb</groupId>
             <artifactId>jaxb-runtime</artifactId>
+            <version>2.3.0</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.jsoup/jsoup -->
+        <dependency>
+            <groupId>org.jsoup</groupId>
+            <artifactId>jsoup</artifactId>
+            <version>1.11.3</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.quartz-scheduler/quartz -->
+        <dependency>
+            <groupId>org.quartz-scheduler</groupId>
+            <artifactId>quartz</artifactId>
             <version>2.3.0</version>
         </dependency>
     </dependencies>

@@ -28,7 +28,7 @@ public class ConsoleInput implements Input {
     /**
      * ask. This method displays the message to the user and returns its response.
      * @param message - the message to the user.
-     * @param range - an array with the range of menu items.
+     * @param range - an array with the range of menu ru.job4j.items.
      * @return - the user's response.
      */
     @Override

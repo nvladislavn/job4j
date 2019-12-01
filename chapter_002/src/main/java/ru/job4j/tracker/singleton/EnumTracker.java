@@ -58,10 +58,10 @@ public enum EnumTracker {
     }
 
     /**
-     * findByName. This method returns the array of items with the given name.
+     * findByName. This method returns the array of ru.job4j.items with the given name.
      *
      * @param key - the given name.
-     * @return the array of items with the given name.
+     * @return the array of ru.job4j.items with the given name.
      */
     public List<Item> findByName(String key) {
         return tracker.findByName(key);

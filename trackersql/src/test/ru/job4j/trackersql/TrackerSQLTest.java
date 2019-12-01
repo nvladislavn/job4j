@@ -65,16 +65,16 @@ public class TrackerSQLTest {
     private void createTable() {
         fillItems();
         String createSQL = "DROP TABLE IF EXISTS "
-                + "    items,"
+                + "    ru.job4j.items,"
                 + "    comments;"
-                + "CREATE TABLE items "
+                + "CREATE TABLE ru.job4j.items "
                 + "("
                 + "    id          VARCHAR(13) PRIMARY KEY, "
                 + "    name        VARCHAR(2000), "
                 + "    description VARCHAR(3000), "
                 + "    created     BIGINT "
                 + "); "
-                + "INSERT INTO items (id, name, description) "
+                + "INSERT INTO ru.job4j.items (id, name, description) "
                 + "VALUES (?, ?, ?), "
                 + "(?, ?, ?), "
                 + "(?, ?, ?);";
@@ -116,7 +116,7 @@ public class TrackerSQLTest {
     public void creationDateShouldBeEqualSelectedDate() {
         trackerSQL.add(testItem);
         String query = "SELECT created " +
-                "FROM items " +
+                "FROM ru.job4j.items " +
                 "WHERE name = 'testItem';";
         try (Statement statement = connection.createStatement()) {
             ResultSet res = statement.executeQuery(query);
@@ -136,7 +136,7 @@ public class TrackerSQLTest {
         String testId = "22222";
         testItem.setId(testId);
         trackerSQL.replace(testId, testItem);
-        String query = String.format("SELECT name FROM items WHERE id = '%s';", testId);
+        String query = String.format("SELECT name FROM ru.job4j.items WHERE id = '%s';", testId);
         try (Statement statement = connection.createStatement()) {
             ResultSet res = statement.executeQuery(query);
             assertTrue(res.next());
@@ -153,12 +153,12 @@ public class TrackerSQLTest {
     @Test
     public void shouldBeDeletedTheRowWithID22222() {
         String preQuery = "SELECT COUNT(*) "
-                + "FROM items "
+                + "FROM ru.job4j.items "
                 + "WHERE id = '22222';";
         String postQuery = "SELECT COUNT(*) FROM "
                 + "("
                 + "SELECT * "
-                + "FROM items "
+                + "FROM ru.job4j.items "
                 + "WHERE id = '22222') as s ";
         try (Statement statement = connection.createStatement()) {
             ResultSet res = statement.executeQuery(preQuery);
