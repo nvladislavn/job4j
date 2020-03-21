@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<configuration status="WARN">
+<appenders>
+    <File name="file" filename="logs/afterSQLExam.log">
+        <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+    </File>
+</appenders>
+
+<loggers>
+    <Root level="all">
+        <appenderRef ref="file"/>
+    </Root>
+</loggers>
+</configuration>

@@ -25,6 +25,7 @@
         <module>junior_001</module>
         <module>trackersql</module>
         <module>parser</module>
+        <module>afterSQLExam</module>
     </modules>
 
     <profiles>
@@ -184,7 +185,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
-                <version>3.0.0</version>
+                <version>3.2.0</version>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
