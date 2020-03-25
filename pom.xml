@@ -26,6 +26,7 @@
         <module>trackersql</module>
         <module>parser</module>
         <module>afterSQLExam</module>
+        <module>afterExamOnlySQL</module>
     </modules>
 
     <profiles>
