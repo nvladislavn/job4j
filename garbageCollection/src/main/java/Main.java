@@ -6,12 +6,18 @@
  */
 public class Main {
 
+    private static Runtime runtime = Runtime.getRuntime();
+    public static final String LS = System.lineSeparator();
+
     public static void main(String[] args) {
-        System.out.println(Runtime.getRuntime().totalMemory());
-        System.out.println(Runtime.getRuntime().freeMemory());
+        System.out.printf("Start Total memory %s byte%s", runtime.totalMemory(), LS);
+        System.out.printf("Start Free memory %s byte%s", runtime.freeMemory(), LS);
         int nameNumber = 0;
-        for (int i = 0; i < 10000; i++) {
-            new User(i + 1, "name" + nameNumber);
+        int counter = 0;
+        for (int i = 1; i < 1001; i++) {
+            new User(i, "name" + nameNumber);
+            counter++;
+            System.err.printf("%d. User with name name%d created%s", counter, nameNumber, LS);
             nameNumber = nameNumber < 9 ? ++nameNumber : 0;
             if (i % 100 == 0) {
                 runtimeInfo();
@@ -20,16 +26,15 @@ public class Main {
     }
 
     private static void runtimeInfo() {
-        Runtime runtime = Runtime.getRuntime();
         System.err.printf(
                 "Available free memory  %s%s",
                 (runtime.freeMemory()),
-                System.lineSeparator()
+                LS
         );
         System.err.printf(
                 "Used memory  %s%s",
                 (runtime.totalMemory() - runtime.freeMemory()),
-                System.lineSeparator()
+                LS
         );
     }
 }
