@@ -28,6 +28,7 @@
         <module>afterSQLExam</module>
         <module>afterExamOnlySQL</module>
         <module>garbageCollection</module>
+        <module>softCache</module>
     </modules>
 
     <profiles>
