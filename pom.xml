@@ -29,6 +29,8 @@
         <module>afterExamOnlySQL</module>
         <module>garbageCollection</module>
         <module>softCache</module>
+        <module>ood</module>
+        <module>ood</module>
     </modules>
 
     <profiles>
