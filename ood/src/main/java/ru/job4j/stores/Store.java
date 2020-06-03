@@ -1,6 +1,6 @@
-package ru.job4j.design.srp.stores;
+package ru.job4j.stores;
 
-import ru.job4j.design.srp.items.Employee;
+import ru.job4j.items.Employee;
 
 import java.util.List;
 import java.util.function.Predicate;

@@ -1,7 +1,8 @@
-package ru.job4j.design.srp.reports;
+package ru.job4j.reports;
 
-import ru.job4j.design.srp.items.Employee;
-import ru.job4j.design.srp.stores.Store;
+import ru.job4j.ReportStrategy;
+import ru.job4j.items.Employee;
+import ru.job4j.stores.Store;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -25,7 +26,7 @@ public class AccountingReport implements ReportStrategy {
      * doReport
      * generates a report for accounting.
      *
-     * @param store - object of store.
+     * @param store  - object of store.
      * @param filter - filter to get data about employees.
      * @return - the report string.
      */
@@ -38,18 +39,28 @@ public class AccountingReport implements ReportStrategy {
         employees.forEach(
                 e -> e.setSalary(e.getSalary() * dollarRate)
         );
+        return generateReportBody(employees);
+    }
+
+    /**
+     * generateReportBody
+     * generates a report body.
+     *
+     * @param employees - a list of Employees.
+     * @return - the report string.
+     */
+    public String generateReportBody(List<Employee> employees) {
         StringJoiner joiner = new StringJoiner("");
-        joiner.add("Report for Accounting")
-                .add(LS)
-                .add("Name;Hired;Fired;Salary").add(LS);
+        joiner.add("Name;Hired;Fired;Salary").add(LS);
         DateFormat df = new SimpleDateFormat("dd.MM.yyyy");
         employees.forEach(employee -> joiner
-                                        .add(employee.getName().strip()).add(SMC)
-                                        .add(df.format(employee.getHired().getTime())).add(SMC)
-                                        .add(df.format(employee.getFired().getTime())).add(SMC)
-                                        .add(Double.toString(employee.getSalary()))
-                                        .add(LS)
+                .add(employee.getName().strip()).add(SMC)
+                .add(df.format(employee.getHired().getTime())).add(SMC)
+                .add(df.format(employee.getFired().getTime())).add(SMC)
+                .add(Double.toString(employee.getSalary()))
+                .add(LS)
         );
         return joiner.toString();
     }
 }
+

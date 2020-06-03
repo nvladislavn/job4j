@@ -1,10 +1,9 @@
-package ru.job4j.design.srp.reports;
+package ru.job4j.reports;
 
-import ru.job4j.design.srp.items.Employee;
-import ru.job4j.design.srp.stores.Store;
+import ru.job4j.ReportStrategy;
+import ru.job4j.items.Employee;
+import ru.job4j.stores.Store;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.StringJoiner;
 import java.util.function.Predicate;
@@ -37,17 +36,28 @@ public class HRReport implements ReportStrategy {
             return "There are no employees meeting the given conditions.";
         }
         employees = employees.stream()
-                                .sorted((employee1, employee2) -> (int) (employee2.getSalary() - employee1.getSalary()))
-                                .collect(Collectors.toList());
+                .sorted((employee1, employee2) -> (int) (employee2.getSalary() - employee1.getSalary()))
+                .collect(Collectors.toList());
         StringJoiner joiner = new StringJoiner("");
         joiner.add("Report for HR")
                 .add(LS)
                 .add("Name;Salary").add(LS);
-        DateFormat df = new SimpleDateFormat("dd.MM.yyyy");
+        return generateReportBody(employees);
+    }
+
+    /**
+     * generateReportBody
+     * generates a report body.
+     *
+     * @param employees - a list of Employees.
+     * @return - the report string.
+     */
+    public String generateReportBody(List<Employee> employees) {
+        StringJoiner joiner = new StringJoiner("");
         employees.forEach(employee -> joiner
-                                        .add(employee.getName()).add(SMC)
-                                        .add(Double.toString(employee.getSalary()))
-                                        .add(LS)
+                .add(employee.getName()).add(SMC)
+                .add(Double.toString(employee.getSalary()))
+                .add(LS)
         );
         return joiner.toString();
     }

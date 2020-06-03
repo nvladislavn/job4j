@@ -1,7 +1,7 @@
-package ru.job4j.design.srp.reports;
+package ru.job4j;
 
-import ru.job4j.design.srp.items.Employee;
-import ru.job4j.design.srp.stores.Store;
+import ru.job4j.items.Employee;
+import ru.job4j.stores.Store;
 
 import java.util.function.Predicate;
 

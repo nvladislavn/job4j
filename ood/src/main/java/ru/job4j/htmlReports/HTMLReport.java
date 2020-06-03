@@ -1,7 +1,8 @@
-package ru.job4j.design.srp.reports;
+package ru.job4j.htmlReports;
 
-import ru.job4j.design.srp.items.Employee;
-import ru.job4j.design.srp.stores.Store;
+import ru.job4j.items.Employee;
+import ru.job4j.ReportStrategy;
+import ru.job4j.stores.Store;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
