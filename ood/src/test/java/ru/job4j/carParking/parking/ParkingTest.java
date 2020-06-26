@@ -32,9 +32,9 @@ public class ParkingTest {
         passCar3 = PassengerCar.getPassengerCar();
         parking.add(passCar3);
         truck1 = Truck.getTruck(2);
-        parking.add(Truck.getTruck(2));
+        parking.add(truck1);
         truck2 = Truck.getTruck(3);
-        parking.add(Truck.getTruck(3));
+        parking.add(truck2);
     }
 
     /**
@@ -61,7 +61,7 @@ public class ParkingTest {
     }
 
     /**
-     * Tests method add(ICar car) (@link ru.job4j.carParking.parking.Parking#add(ICar car))
+     * Tests method add(ICar car) (@link ru.job4j.carParking.parking.Parking#add(ICar car)).
      * @throws LimitException (@see ru.job4j.carParking.parking.LimitException).
      */
     @Test
@@ -72,7 +72,7 @@ public class ParkingTest {
     }
 
     /**
-     * Tests method contains(ICar car) (@link ru.job4j.carParking.parking.Parking#contains(ICar car))
+     * Tests method contains(ICar car) (@link ru.job4j.carParking.parking.Parking#contains(ICar car)).
      */
     @Test
     public void whenAddedTruckThenContainsShouldReturnTrue() {
@@ -80,7 +80,18 @@ public class ParkingTest {
     }
 
     /**
-     * Tests method contains(ICar car) (@link ru.job4j.carParking.parking.Parking#contains(ICar car))
+     * Tests method add(ICar car) (@link ru.job4j.carParking.parking.Parking#add(ICar car)).
+     * @throws LimitException (@see ru.job4j.carParking.parking.LimitException).
+     */
+    @Test
+    public void shouldReturn11() throws LimitException {
+        int actualIndex = parking.add(Truck.getTruck(2));
+        int expectedIndex = 11;
+        assertEquals(actualIndex, expectedIndex);
+    }
+
+    /**
+     * Tests method contains(ICar car) (@link ru.job4j.carParking.parking.Parking#contains(ICar car)).
      */
     @Test
     public void whenCarIsNotAddThenContainsShouldReturnFalse() {
@@ -95,9 +106,9 @@ public class ParkingTest {
      */
     @Test
     public void firstShouldReturnTrueThenFalseForTruck() {
-        assertTrue(parking.contains(truck1));
-        parking.removeCar(truck1.getID());
-        assertFalse(parking.contains(truck1));
+        assertTrue(parking.contains(truck2));
+        parking.removeCar(truck2.getID());
+        assertFalse(parking.contains(truck2));
     }
 
     /**
@@ -112,7 +123,7 @@ public class ParkingTest {
     }
 
     /**
-     * Tests method getCarList() (@link ru.job4j.carParking.parking.Parking#getCarList())
+     * Tests method getCarList() (@link ru.job4j.carParking.parking.Parking#getCarList()).
      */
     @Test
     public void shouldReturnThreePassengerCarAndTwoTruck() {
