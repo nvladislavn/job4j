@@ -3,6 +3,8 @@ package ru.job4j.xoGame.logic;
 import ru.job4j.xoGame.board.Board;
 import ru.job4j.xoGame.board.Cell;
 
+import java.util.stream.IntStream;
+
 public class LogicXO implements Logic {
 
     private Board board;
@@ -13,43 +15,35 @@ public class LogicXO implements Logic {
 
     @Override
     public boolean isWin() {
-        return isWinRow() || isWinColumn() || isWinDiagonal();
+        return IntStream
+                .range(0, board.size())
+                .anyMatch(i -> isWinRow(i) || isWinColumn(i)) || isWinDiagonal();
     }
 
-    private boolean isWinRow() {
-        boolean res = false;
-        for (int i = 0; i < board.size(); i++) {
-            Cell.Value firstCellInRow = board.getCell(i, 0).value();
-            if (firstCellInRow == Cell.Value.EMPTY) {
-                continue;
-            }
-            res = true;
-            for (int j = 1; j < board.size(); j++) {
-                res = res & board.getCell(i, j).value() == firstCellInRow;
-            }
-            if (res) {
-                break;
+    private boolean isWinRow(int i) {
+        Cell.Value firstValue = board.getCell(i, 0).value();
+        if (firstValue == Cell.Value.EMPTY) {
+            return false;
+        }
+        for (int j = 1; j < board.size(); j++) {
+            if (board.getCell(i, j).value() != firstValue) {
+                return false;
             }
         }
-        return res;
+        return true;
     }
 
-    private boolean isWinColumn() {
-        boolean res = false;
-        for (int i = 0; i < board.size(); i++) {
-            Cell.Value firstCellInColumn = board.getCell(0, i).value();
-            if (firstCellInColumn == Cell.Value.EMPTY) {
-                continue;
-            }
-            res = true;
-            for (int j = 0; j < board.size(); j++) {
-                res = res & board.getCell(j, i).value() == firstCellInColumn;
-            }
-            if (res) {
-                break;
+    private boolean isWinColumn(int i) {
+        Cell.Value firstValue = board.getCell(0, i).value();
+        if (firstValue == Cell.Value.EMPTY) {
+            return false;
+        }
+        for (int j = 1; j < board.size(); j++) {
+            if (board.getCell(j, i).value() != firstValue) {
+                return false;
             }
         }
-        return res;
+        return true;
     }
 
     private boolean isWinDiagonal() {
